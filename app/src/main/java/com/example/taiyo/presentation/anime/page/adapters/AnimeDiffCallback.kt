@@ -1,4 +1,4 @@
-package com.example.taiyo.presentation.anime
+package com.example.taiyo.presentation.anime.page.adapters
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.taiyo.domain.entity.Anime

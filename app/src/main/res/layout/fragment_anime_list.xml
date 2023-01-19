@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.anime.OngoingsFragment">
+    tools:context=".presentation.anime.page.movies.MoviesFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
@@ -20,8 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="6"
-            tools:listitem="@layout/item_anime_ongoing"/>
+            app:spanCount="3"
+            tools:listitem="@layout/item_anime_ongoings"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -30,10 +30,7 @@
         layout="@layout/main_load_state"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:layout_gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_marginBottom="72dp"
+        android:layout_gravity="center" />
+
 </FrameLayout>

@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    // Anime
     <style name="roundedImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
+    </style>
+    // TabLayout
+    <style name="TabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15sp</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="textAllCaps">false</item>
+    </style>
+    <style name="TabIndicator" parent="android:Widget">
+        <item name="tabIndicatorColor">@color/carmine_pink</item>
+        <item name="tabSelectedTextColor">@color/carmine_pink</item>
+        <item name="tabIndicatorAnimationMode">elastic</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabIndicatorHeight">3dp</item>
+        <item name="tabPaddingStart">22dp</item>
+        <item name="tabPaddingEnd">22dp</item>
     </style>
 </resources>
