@@ -1,4 +1,4 @@
-package com.example.taiyo.presentation.anime
+package com.example.taiyo.presentation.anime.page.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

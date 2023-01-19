@@ -1,4 +1,4 @@
-package com.example.taiyo.presentation.anime
+package com.example.taiyo.presentation.anime.page.released
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -13,7 +13,9 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.anilite.presentation.simpleScan
 import com.example.taiyo.R
-import com.example.taiyo.databinding.FragmentAnimeBinding
+import com.example.taiyo.databinding.FragmentAnimeListBinding
+import com.example.taiyo.presentation.anime.page.adapters.MainLoadStateAdapter
+import com.example.taiyo.presentation.anime.page.adapters.RefreshAction
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -21,14 +23,14 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
-class OngoingsFragment : Fragment() {
-    private lateinit var viewModel: OngoingsViewModel
+class ReleasedFragment : Fragment() {
+    private lateinit var viewModel: ReleasedViewModel
 
-    private var _binding: FragmentAnimeBinding? = null
-    private val binding: FragmentAnimeBinding
-        get() = _binding ?: throw RuntimeException("FragmentAnimeBinding is null")
+    private var _binding: FragmentAnimeListBinding? = null
+    private val binding: FragmentAnimeListBinding
+        get() = _binding ?: throw RuntimeException("FragmentAnimeListBinding is null")
 
-    private lateinit var adapter: OngoingsAdapter
+    private lateinit var adapter: ReleasedAdapter
 
     private lateinit var mainLoadStateViewHolder: MainLoadStateAdapter.MainLoaderViewHolder
 
@@ -39,14 +41,14 @@ class OngoingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentAnimeBinding.inflate(inflater, container, false)
+        _binding = FragmentAnimeListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     @FlowPreview
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[OngoingsViewModel::class.java]
+        viewModel = ViewModelProvider(this)[ReleasedViewModel::class.java]
         setupAnimeList()
         setupSwipeToRefresh()
     }
@@ -67,7 +69,7 @@ class OngoingsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = OngoingsAdapter(requireContext())
+        adapter = ReleasedAdapter(requireContext())
         val refreshAction: RefreshAction = {
             adapter.retry()
         }
@@ -104,9 +106,10 @@ class OngoingsFragment : Fragment() {
         binding.swipeRefreshLayout.setColorSchemeResources(
             R.color.loading, R.color.loading
         )
+        binding.swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.bg)
     }
 
-    private fun observeAnimeList(adapter: OngoingsAdapter) {
+    private fun observeAnimeList(adapter: ReleasedAdapter) {
         lifecycleScope.launch {
             viewModel.animeFlow.collectLatest { pagingData ->
                 adapter.submitData(pagingData)
@@ -115,7 +118,7 @@ class OngoingsFragment : Fragment() {
     }
 
     @OptIn(FlowPreview::class)
-    private fun observeLoadState(adapter: OngoingsAdapter) {
+    private fun observeLoadState(adapter: ReleasedAdapter) {
         lifecycleScope.launch {
             adapter.loadStateFlow.debounce(500).collectLatest { state ->
                 mainLoadStateViewHolder.bind(state.refresh)
@@ -123,7 +126,7 @@ class OngoingsFragment : Fragment() {
         }
     }
 
-    private fun handleScrollingToTopWhenLoaded(adapter: OngoingsAdapter) = lifecycleScope.launch {
+    private fun handleScrollingToTopWhenLoaded(adapter: ReleasedAdapter) = lifecycleScope.launch {
         getRefreshLoadStateFlow(adapter)
             .simpleScan(count = 2)
             .collectLatest { (previousState, currentState) ->
@@ -135,7 +138,7 @@ class OngoingsFragment : Fragment() {
             }
     }
 
-    private fun handleListVisibility(adapter: OngoingsAdapter) = lifecycleScope.launch {
+    private fun handleListVisibility(adapter: ReleasedAdapter) = lifecycleScope.launch {
         getRefreshLoadStateFlow(adapter)
             .simpleScan(count = 3)
             .collectLatest { (beforePrevious, previous, current) ->
@@ -148,7 +151,11 @@ class OngoingsFragment : Fragment() {
             }
     }
 
-    private fun getRefreshLoadStateFlow(adapter: OngoingsAdapter): Flow<LoadState> {
+    private fun getRefreshLoadStateFlow(adapter: ReleasedAdapter): Flow<LoadState> {
         return adapter.loadStateFlow.map { it.refresh }
+    }
+
+    companion object {
+        fun newInstance() = ReleasedFragment()
     }
 }

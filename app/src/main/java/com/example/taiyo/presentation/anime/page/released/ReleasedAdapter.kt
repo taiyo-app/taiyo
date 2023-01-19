@@ -1,4 +1,4 @@
-package com.example.taiyo.presentation.anime
+package com.example.taiyo.presentation.anime.page.released
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,33 +6,38 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.taiyo.R
-import com.example.taiyo.databinding.ItemAnimeOngoingBinding
+import com.example.taiyo.databinding.ItemAnimeReleasedBinding
 import com.example.taiyo.domain.entity.Anime
+import com.example.taiyo.presentation.anime.page.adapters.AnimeDiffCallback
 
-class OngoingsAdapter(
-    private val context: Context
+class ReleasedAdapter(
+    private val context: Context,
 ) : PagingDataAdapter<Anime, ViewHolder>(AnimeDiffCallback) {
     var onAnimeClick: ((Anime) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemAnimeOngoingBinding.inflate(
+        val binding = ItemAnimeReleasedBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return OngoingViewHolder(binding)
+        return ReleasedViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val anime = getItem(position)
         anime?.let {
-            with ((holder as OngoingViewHolder).binding) {
+            with((holder as ReleasedViewHolder).binding) {
                 with(it) {
-                    Glide.with(context).load(it.image).into(sivPoster)
+                    Glide.with(context)
+                        .load(it.image)
+                        .transition(DrawableTransitionOptions.withCrossFade())
+                        .into(sivPoster)
                     tvTitle.text = it.title
-                    tvEpisodesAired.text = it.episodesAired.toString()
-                    tvEpisodesTotal.text = context.getString(R.string.ongoings_episodes, episodesTotal)
+                    tvEpisodesTotal.text =
+                        context.getString(R.string.ongoings_episodes, episodesTotal)
                     root.setOnClickListener { onAnimeClick?.invoke(this) }
                 }
             }

@@ -2,13 +2,24 @@
     <string name="app_name">Taiyo β</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="get_recommendations">Аниме/Манга в приложении Taiyo</string>
 
+    // Anime
+    <string name="get_recommendations">Аниме/Манга в приложении Taiyo</string>
     <string name="episodes_separator">&#160;|&#160;</string>
     <string name="ongoings_episodes">%s эп</string>
 
+    // LoadState
     <string name="load_error">Не удалось загрузить страницу</string>
     <string name="load_error_info">Проверьте подключение к Интернету</string>
     <string name="refresh_button">Попробовать снова</string>
+
+    // TabLayout
+    <string name="ongoings">Онгоинги</string>
+    <string name="anons">Анонсы</string>
+    <string name="released">Завершенные</string>
+    <string name="movies">Фильмы</string>
+
+    // Appbar
+    <string name="search_anime">Поиск аниме</string>
 
 </resources>

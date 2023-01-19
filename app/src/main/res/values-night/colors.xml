@@ -6,13 +6,11 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
-    <color name="bg">#FFFFFF</color>
-    <color name="bg_black">#000000</color>
-    <color name="bg_white">#FFFFFF</color>
+    <color name="bg">#121212</color>
 
-    <color name="iconColor">#696969</color>
+    <color name="iconColor">#757575</color>
 
-    <color name="loading">#ff5c64</color>
+    <color name="loading">#e0e0e0</color>
 
     <color name="carmine_pink">#ff5c64</color>
     <color name="violet">#91A6FF</color>

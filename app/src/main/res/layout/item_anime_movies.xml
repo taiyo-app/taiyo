@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="-16dp"
+    android:layout_marginEnd="-16dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:layout_marginTop="-12dp"
+        android:layout_marginBottom="-20dp"
+        android:padding="24dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/siv_poster"
+                android:layout_width="116dp"
+                android:layout_height="164dp"
+                android:scaleType="centerCrop"
+                android:transitionName="mediaCover"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
+                tools:ignore="ContentDescription,ImageContrastCheck"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="2dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="116dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto_regular"
+            android:transitionName="mediaTitle"
+            tools:text="@string/get_recommendations"
+            tools:ignore="SpUsage" />
+
+            <TextView
+                android:id="@+id/tv_episodes_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="14sp"
+                android:textColor="?attr/colorSecondary"
+                tools:text="0 эп" />
+
+    </LinearLayout>
+
+</LinearLayout>
