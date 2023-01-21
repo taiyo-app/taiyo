@@ -7,8 +7,8 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.taiyo.databinding.FooterLoadStateBinding
-import com.example.taiyo.databinding.MainLoadStateBinding
+import com.taiyoapp.taiyo.databinding.FooterLoadStateBinding
+import com.taiyoapp.taiyo.databinding.MainLoadStateBinding
 
 typealias RefreshAction = () -> Unit
 

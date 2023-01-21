@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.taiyo.R
-import com.example.taiyo.databinding.ItemAnimeAnonsBinding
-import com.example.taiyo.databinding.ItemAnimeOngoingsBinding
-import com.example.taiyo.databinding.ItemAnimeReleasedBinding
+import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.AnonsViewHolder
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.OngoingsViewHolder
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.ReleasedViewHolder
+import com.taiyoapp.taiyo.databinding.ItemAnimeAnonsBinding
+import com.taiyoapp.taiyo.databinding.ItemAnimeOngoingsBinding
+import com.taiyoapp.taiyo.databinding.ItemAnimeReleasedBinding
 
 class SearchAdapter(
     private val context: Context,

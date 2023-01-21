@@ -10,7 +10,7 @@
         android:id="@+id/fragment_container_view"
         android:name="com.taiyoapp.taiyo.AnimeFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         tools:layout="@layout/fragment_anime"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
