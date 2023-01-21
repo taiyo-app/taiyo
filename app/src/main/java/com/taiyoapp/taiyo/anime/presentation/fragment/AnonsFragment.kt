@@ -11,13 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.presentation.util.simpleScan
-import com.example.taiyo.R
-import com.example.taiyo.databinding.FragmentAnimeListBinding
 import com.taiyoapp.taiyo.anime.presentation.adapter.AnonsAdapter
 import com.taiyoapp.taiyo.anime.presentation.adapter.MainLoadStateAdapter
 import com.taiyoapp.taiyo.anime.presentation.adapter.RefreshAction
 import com.taiyoapp.taiyo.anime.presentation.viewmodel.AnonsViewModel
+import com.taiyoapp.taiyo.databinding.FragmentAnimeListBinding
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest

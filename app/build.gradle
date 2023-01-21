@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.taiyo'
+    namespace 'com.taiyoapp.taiyo'
     compileSdk 33
 
     defaultConfig {

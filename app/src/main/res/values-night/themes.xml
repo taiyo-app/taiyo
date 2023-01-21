@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Taiyo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimary">@color/carmine_pink</item>
         <item name="colorPrimaryVariant">@color/bg</item>
         <item name="colorOnPrimary">@color/violet</item>
         <!-- Secondary brand color. -->

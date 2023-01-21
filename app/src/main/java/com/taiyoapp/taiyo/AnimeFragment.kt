@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.taiyo.databinding.FragmentAnimeBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.taiyoapp.taiyo.anime.presentation.adapter.ViewPagerAdapter
 import com.taiyoapp.taiyo.anime.presentation.fragment.*
+import com.taiyoapp.taiyo.databinding.FragmentAnimeBinding
 
 class AnimeFragment : Fragment() {
     private var _binding: FragmentAnimeBinding? = null
@@ -37,10 +37,10 @@ class AnimeFragment : Fragment() {
         val viewPagerAdapter = ViewPagerAdapter(this, fragmentList)
         binding.viewPager2.adapter = viewPagerAdapter
         val fragmentListTitles = listOf(
-            getString(com.example.taiyo.R.string.ongoings),
-            getString(com.example.taiyo.R.string.anons),
-            getString(com.example.taiyo.R.string.released),
-            getString(com.example.taiyo.R.string.movies)
+            getString(R.string.ongoings),
+            getString(R.string.anons),
+            getString(R.string.released),
+            getString(R.string.movies)
         )
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             tab.text = fragmentListTitles[position]
@@ -66,7 +66,7 @@ class AnimeFragment : Fragment() {
     private fun launchSearchFragment() {
         val searchFragment = SearchFragment.newInstance()
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(com.example.taiyo.R.id.fragment_container_view, searchFragment)
+            .replace(R.id.fragment_container_view, searchFragment)
             .addToBackStack(null)
             .commit()
     }

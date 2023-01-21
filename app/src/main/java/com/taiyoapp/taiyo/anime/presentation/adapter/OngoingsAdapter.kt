@@ -7,10 +7,10 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.taiyo.R
-import com.example.taiyo.databinding.ItemAnimeOngoingsBinding
+import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.OngoingsViewHolder
+import com.taiyoapp.taiyo.databinding.ItemAnimeOngoingsBinding
 
 class OngoingsAdapter(
     private val context: Context
