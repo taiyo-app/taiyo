@@ -7,6 +7,7 @@
     <string name="get_recommendations">Аниме/Манга в приложении Taiyo</string>
     <string name="episodes_separator">&#160;|&#160;</string>
     <string name="ongoings_episodes">%s эп</string>
+    <string name="soon">скоро</string>
 
     // LoadState
     <string name="load_error">Не удалось загрузить страницу</string>
@@ -21,5 +22,12 @@
 
     // Appbar
     <string name="search_anime">Поиск аниме</string>
+
+    <string name="search_result">Результаты поиска</string>
+
+    // Menu
+    <string name="anime">Аниме</string>
+    <string name="profile">Профиль</string>
+    <string name="manga">Манга</string>
 
 </resources>

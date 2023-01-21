@@ -14,7 +14,7 @@
         android:layout_height="56dp"
         android:layout_marginStart="10dp"
         android:background="@color/bg"
-        app:srcCompat="@drawable/ic_search"
+        app:srcCompat="@drawable/ic_search_24"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
     <TextView

@@ -9,6 +9,7 @@
     <color name="bg">#FFFFFF</color>
     <color name="bg_black">#000000</color>
     <color name="bg_white">#FFFFFF</color>
+    <color name="text">#000000</color>
 
     <color name="iconColor">#696969</color>
 

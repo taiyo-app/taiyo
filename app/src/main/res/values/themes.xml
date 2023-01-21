@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Taiyo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/bg</item>
+        <item name="colorPrimary">@color/carmine_pink</item>
         <item name="colorPrimaryVariant">@color/purple_200</item>
         <item name="colorOnPrimary">@color/violet</item>
         <!-- Secondary brand color. -->
@@ -16,6 +16,7 @@
         <item name="android:windowBackground">@color/bg</item>
         <item name="android:colorBackground">@color/bg</item>
         <item name="android:textColor">@color/bg_black</item>
+        <item name="android:textColorHint">@color/bg_black</item>
 
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
