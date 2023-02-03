@@ -22,4 +22,10 @@ data class AnimeDto(
     @SerializedName("episodes_aired")
     @Expose
     val episodesAired: String?,
-)
+) {
+    data class AnimeImageDto(
+        @SerializedName("original")
+        @Expose
+        val original: String
+    )
+}

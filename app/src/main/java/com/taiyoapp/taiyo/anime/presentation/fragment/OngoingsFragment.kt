@@ -12,10 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.taiyoapp.taiyo.R
-import com.taiyoapp.taiyo.anime.presentation.util.simpleScan
+import com.taiyoapp.taiyo.anime.presentation.activity.AnimeDetailActivity
 import com.taiyoapp.taiyo.anime.presentation.adapter.MainLoadStateAdapter
 import com.taiyoapp.taiyo.anime.presentation.adapter.OngoingsAdapter
 import com.taiyoapp.taiyo.anime.presentation.adapter.RefreshAction
+import com.taiyoapp.taiyo.anime.presentation.util.simpleScan
 import com.taiyoapp.taiyo.anime.presentation.viewmodel.OngoingsViewModel
 import com.taiyoapp.taiyo.databinding.FragmentAnimeListBinding
 import kotlinx.coroutines.FlowPreview
@@ -72,6 +73,10 @@ class OngoingsFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = OngoingsAdapter(requireContext())
+        adapter.onAnimeClick = {
+            val intent = AnimeDetailActivity.newIntent(requireContext(), it.id)
+            startActivity(intent)
+        }
         val refreshAction: RefreshAction = {
             adapter.retry()
         }

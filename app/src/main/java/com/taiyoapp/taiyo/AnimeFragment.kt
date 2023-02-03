@@ -15,8 +15,7 @@ class AnimeFragment : Fragment() {
     private val binding: FragmentAnimeBinding
         get() = _binding ?: throw RuntimeException("FragmentAnimeBinding is null")
 
-    private val fragmentList = listOf(
-        OngoingsFragment.newInstance(),
+    private val fragmentList = listOf(OngoingsFragment.newInstance(),
         AnonsFragment.newInstance(),
         ReleasedFragment.newInstance(),
         MoviesFragment.newInstance()
@@ -36,12 +35,10 @@ class AnimeFragment : Fragment() {
         setupAppBar()
         val viewPagerAdapter = ViewPagerAdapter(this, fragmentList)
         binding.viewPager2.adapter = viewPagerAdapter
-        val fragmentListTitles = listOf(
-            getString(R.string.ongoings),
+        val fragmentListTitles = listOf(getString(R.string.ongoings),
             getString(R.string.anons),
             getString(R.string.released),
-            getString(R.string.movies)
-        )
+            getString(R.string.movies))
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             tab.text = fragmentListTitles[position]
         }.attach()
@@ -53,7 +50,7 @@ class AnimeFragment : Fragment() {
     }
 
     private fun setupAppBar() {
-        with (binding.search) {
+        with(binding.search) {
             ibSearch.setOnClickListener {
                 launchSearchFragment()
             }
@@ -66,8 +63,6 @@ class AnimeFragment : Fragment() {
     private fun launchSearchFragment() {
         val searchFragment = SearchFragment.newInstance()
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, searchFragment)
-            .addToBackStack(null)
-            .commit()
+            .replace(R.id.fragment_container_view, searchFragment).addToBackStack(null).commit()
     }
 }

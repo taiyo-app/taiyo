@@ -12,10 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.taiyoapp.taiyo.R
-import com.taiyoapp.taiyo.anime.presentation.util.simpleScan
 import com.taiyoapp.taiyo.anime.presentation.adapter.MainLoadStateAdapter
 import com.taiyoapp.taiyo.anime.presentation.adapter.MoviesAdapter
 import com.taiyoapp.taiyo.anime.presentation.adapter.RefreshAction
+import com.taiyoapp.taiyo.anime.presentation.util.simpleScan
 import com.taiyoapp.taiyo.anime.presentation.viewmodel.MoviesViewModel
 import com.taiyoapp.taiyo.databinding.FragmentAnimeListBinding
 import kotlinx.coroutines.FlowPreview

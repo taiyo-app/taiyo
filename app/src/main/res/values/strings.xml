@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Taiyo β</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     // Anime
     <string name="get_recommendations">Аниме/Манга в приложении Taiyo</string>
@@ -20,14 +18,34 @@
     <string name="released">Завершенные</string>
     <string name="movies">Фильмы</string>
 
-    // Appbar
+    // Search
     <string name="search_anime">Поиск аниме</string>
-
     <string name="search_result">Результаты поиска</string>
 
-    // Menu
+    // Main NavBar
     <string name="anime">Аниме</string>
     <string name="profile">Профиль</string>
     <string name="manga">Манга</string>
+
+    // AnimeDetail
+    <string name="next_series_number">ДО ВЫХОДА %s СЕРИИ</string>
+    <string name="place_holder_symbol">~</string>
+    <string name="rating">Рейтинг</string>
+    <string name="place_holder_rating">&#160;/&#160;</string>
+    <string name="max_rating">10</string>
+    <string name="episodes_total">Всего серий</string>
+    <string name="episodes">%s из %s</string>
+    <string name="kind">Формат</string>
+    <string name="duration_label">Длительность</string>
+    <string name="duration_with_hours">%s ч. %s мин.</string>
+    <string name="duration_with_minutes">%s мин.</string>
+    <string name="studio">Студия</string>
+    <string name="season">Сезон</string>
+    <string name="add_to_list">Добавить в список</string>
+    <string name="empty_description">Описание отсутствует</string>
+
+    // Detail NavBar
+    <string name="description">Описание</string>
+    <string name="watch">Смотреть</string>
 
 </resources>
