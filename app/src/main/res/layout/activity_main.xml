@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
@@ -16,24 +15,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="72dp"
-        tools:context="com.taiyoapp.taiyo.MainActivity" />
+        android:layout_marginBottom="72dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:background="@color/bg"
-        app:itemIconTint="@drawable/navigation_icon_colored"
-        app:itemPaddingTop="12dp"
+        android:background="@color/ui_bg"
         android:paddingBottom="8dp"
-        android:theme="@style/ThemeOverlay.AppTheme.BottomNavigationView"
+        app:itemPaddingTop="12dp"
+        app:itemIconTint="@drawable/navigation_icon_colored"
         app:itemTextColor="@drawable/navigation_text_colored"
         app:itemTextAppearanceActive="@style/BottomNavigationView.Active"
         app:itemTextAppearanceInactive="@style/BottomNavigationView"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/main_bottom_bar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

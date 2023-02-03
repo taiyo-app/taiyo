@@ -3,21 +3,16 @@
     <style name="Theme.Taiyo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/carmine_pink</item>
-        <item name="colorPrimaryVariant">@color/purple_200</item>
         <item name="colorOnPrimary">@color/violet</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/violet</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/bg_black</item>
+        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@color/bg</item>
-        <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/bg</item>
-        <item name="android:colorBackground">@color/bg</item>
-        <item name="android:textColor">@color/bg_black</item>
-        <item name="android:textColorHint">@color/bg_black</item>
-
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textColorHint">@color/black</item>
     </style>
 </resources>
