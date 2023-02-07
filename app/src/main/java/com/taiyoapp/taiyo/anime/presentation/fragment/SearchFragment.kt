@@ -76,6 +76,13 @@ class SearchFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = SearchAdapter(requireContext())
+//        adapter.onAnimeClick = {
+//            val fragment = DetailFragment.newInstance(it.id)
+//            requireActivity().supportFragmentManager.beginTransaction()
+//                .replace(R.id.fragment_container_view, fragment)
+//                .addToBackStack(null)
+//                .commit()
+//        }
         val refreshAction: RefreshAction = {
             adapter.retry()
         }

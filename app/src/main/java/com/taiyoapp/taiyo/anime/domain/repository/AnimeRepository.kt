@@ -4,12 +4,15 @@ import androidx.paging.PagingData
 import com.taiyoapp.taiyo.MediaQuery
 import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.domain.entity.AnimeDetail
+import com.taiyoapp.taiyo.anime.domain.entity.EpisodeList
 import kotlinx.coroutines.flow.Flow
 
 interface AnimeRepository {
     suspend fun getAnimeList(queryMap: HashMap<String, Any>): Flow<PagingData<Anime>>
 
-    suspend fun getAnimeDetail(id: Int): AnimeDetail
+    suspend fun getAnimeDetail(id: Int): Flow<AnimeDetail>
 
     suspend fun getAnimeMedia(id: Int): MediaQuery.Data
+
+    suspend fun getEpisodeList(id: Int): List<EpisodeList.Result>
 }
