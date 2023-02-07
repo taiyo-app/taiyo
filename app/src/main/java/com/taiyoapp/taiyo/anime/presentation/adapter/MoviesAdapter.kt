@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.MoviesViewHolder
-import com.taiyoapp.taiyo.databinding.ItemAnimeMoviesBinding
+import com.taiyoapp.taiyo.databinding.ItemMoviesBinding
 
 class MoviesAdapter(
     private val context: Context
@@ -18,7 +18,7 @@ class MoviesAdapter(
     var onAnimeClick: ((Anime) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemAnimeMoviesBinding.inflate(
+        val binding = ItemMoviesBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

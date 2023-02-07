@@ -44,6 +44,11 @@
     <string name="add_to_list">Добавить в список</string>
     <string name="empty_description">Описание отсутствует</string>
 
+    // Episode fragment
+    <string name="select">Выбрать</string>
+    <string name="dub">Озвучка</string>
+    <string name="episode_number">%s СЕРИЯ</string>
+
     // Detail NavBar
     <string name="description">Описание</string>
     <string name="watch">Смотреть</string>

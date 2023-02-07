@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.OngoingsViewHolder
-import com.taiyoapp.taiyo.databinding.ItemAnimeOngoingsBinding
+import com.taiyoapp.taiyo.databinding.ItemOngoingsBinding
 
 class OngoingsAdapter(
     private val context: Context
@@ -18,7 +18,7 @@ class OngoingsAdapter(
     var onAnimeClick: ((Anime) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemAnimeOngoingsBinding.inflate(
+        val binding = ItemOngoingsBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

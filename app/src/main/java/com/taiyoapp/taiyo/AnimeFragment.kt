@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.taiyoapp.taiyo.anime.presentation.adapter.ViewPagerAdapter
 import com.taiyoapp.taiyo.anime.presentation.fragment.*
 import com.taiyoapp.taiyo.databinding.FragmentAnimeBinding
 
-class AnimeFragment : Fragment() {
+open class AnimeFragment : Fragment() {
     private var _binding: FragmentAnimeBinding? = null
     private val binding: FragmentAnimeBinding
         get() = _binding ?: throw RuntimeException("FragmentAnimeBinding is null")
@@ -42,6 +43,14 @@ class AnimeFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             tab.text = fragmentListTitles[position]
         }.attach()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val bottomNavigationView = (context as MainActivity).findViewById<BottomNavigationView>(
+            R.id.main_bottom_bar
+        )
+        bottomNavigationView.visibility = View.VISIBLE
     }
 
     override fun onDestroyView() {

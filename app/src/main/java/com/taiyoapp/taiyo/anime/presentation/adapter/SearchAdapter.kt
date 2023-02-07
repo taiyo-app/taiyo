@@ -13,9 +13,9 @@ import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.AnonsViewHolder
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.OngoingsViewHolder
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.ReleasedViewHolder
-import com.taiyoapp.taiyo.databinding.ItemAnimeAnonsBinding
-import com.taiyoapp.taiyo.databinding.ItemAnimeOngoingsBinding
-import com.taiyoapp.taiyo.databinding.ItemAnimeReleasedBinding
+import com.taiyoapp.taiyo.databinding.ItemAnonsBinding
+import com.taiyoapp.taiyo.databinding.ItemOngoingsBinding
+import com.taiyoapp.taiyo.databinding.ItemReleasedBinding
 
 class SearchAdapter(
     private val context: Context,
@@ -95,17 +95,17 @@ class SearchAdapter(
 
     private fun getViewBindingType(viewType: Int, parent: ViewGroup): ViewBinding {
         val binding = when (viewType) {
-            VIEW_TYPE_ONGOING -> ItemAnimeOngoingsBinding.inflate(
+            VIEW_TYPE_ONGOING -> ItemOngoingsBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-            VIEW_TYPE_ANONS -> ItemAnimeAnonsBinding.inflate(
+            VIEW_TYPE_ANONS -> ItemAnonsBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
-            VIEW_TYPE_RELEASED -> ItemAnimeReleasedBinding.inflate(
+            VIEW_TYPE_RELEASED -> ItemReleasedBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -117,9 +117,9 @@ class SearchAdapter(
 
     private fun getViewHolderType(binding: ViewBinding): ViewHolder {
         val viewHolder = when (binding) {
-            is ItemAnimeOngoingsBinding -> OngoingsViewHolder(binding)
-            is ItemAnimeAnonsBinding -> AnonsViewHolder(binding)
-            is ItemAnimeReleasedBinding -> ReleasedViewHolder(binding)
+            is ItemOngoingsBinding -> OngoingsViewHolder(binding)
+            is ItemAnonsBinding -> AnonsViewHolder(binding)
+            is ItemReleasedBinding -> ReleasedViewHolder(binding)
             else -> throw RuntimeException("binding is invalid")
         }
         return viewHolder

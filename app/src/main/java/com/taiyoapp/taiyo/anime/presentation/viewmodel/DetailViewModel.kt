@@ -14,14 +14,14 @@ import com.taiyoapp.taiyo.anime.domain.usecase.GetAnimeMediaUseCase
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
-class AnimeDetailViewModel : ViewModel() {
+class DetailViewModel : ViewModel() {
     private val repository = AnimeRepositoryImpl()
 
     private val getAnimeDetailUseCase = GetAnimeDetailUseCase(repository)
     private val getAnimeMediaUseCase = GetAnimeMediaUseCase(repository)
 
-    private var _animeDetail = MutableLiveData<AnimeDetail?>()
-    val animeDetail: LiveData<AnimeDetail?>
+    private var _animeDetail = MutableLiveData<AnimeDetail>()
+    val animeDetail: LiveData<AnimeDetail>
         get() = _animeDetail
 
     private var _animeMedia = MutableLiveData<MediaQuery.Data?>()
@@ -36,7 +36,10 @@ class AnimeDetailViewModel : ViewModel() {
 
     fun loadAnimeDetail(id: Int) {
         viewModelScope.launch {
-            _animeDetail.postValue(getAnimeDetailUseCase(id))
+            getAnimeDetailUseCase(id)
+                .collect {
+                    _animeDetail.value = it
+                }
         }
     }
 
@@ -154,11 +157,12 @@ class AnimeDetailViewModel : ViewModel() {
 
     fun formatDescription(description: String): String {
         val stringBuffer = StringBuffer()
-        val patternSeparator = Pattern.compile("\\[.*?]")
+        val patternSeparator = Pattern.compile("\\[.*?]|\r\n\r")
         val matcher = patternSeparator.matcher(description)
         while (matcher.find()) {
             matcher.appendReplacement(stringBuffer, "")
         }
+        matcher.appendTail(stringBuffer)
         return stringBuffer.toString()
     }
 

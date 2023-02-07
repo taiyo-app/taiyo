@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.AnonsViewHolder
-import com.taiyoapp.taiyo.databinding.ItemAnimeAnonsBinding
+import com.taiyoapp.taiyo.databinding.ItemAnonsBinding
 
 class AnonsAdapter(
     private val context: Context,
@@ -18,7 +18,7 @@ class AnonsAdapter(
     var onAnimeClick: ((Anime) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemAnimeAnonsBinding.inflate(
+        val binding = ItemAnonsBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
