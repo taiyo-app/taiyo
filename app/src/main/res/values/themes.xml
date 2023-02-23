@@ -2,10 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.Taiyo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/carmine_pink</item>
-        <item name="colorOnPrimary">@color/violet</item>
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorOnPrimary">#7596e8</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/violet</item>
+        <item name="colorSecondary">#7596e8</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar">true</item>

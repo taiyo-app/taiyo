@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import com.taiyoapp.taiyo.anime.presentation.adapter.ViewPagerAdapter
 import com.taiyoapp.taiyo.anime.presentation.fragment.*
@@ -45,14 +44,6 @@ open class AnimeFragment : Fragment() {
         }.attach()
     }
 
-    override fun onResume() {
-        super.onResume()
-        val bottomNavigationView = (context as MainActivity).findViewById<BottomNavigationView>(
-            R.id.main_bottom_bar
-        )
-        bottomNavigationView.visibility = View.VISIBLE
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -63,15 +54,14 @@ open class AnimeFragment : Fragment() {
             ibSearch.setOnClickListener {
                 launchSearchFragment()
             }
-            tvSearch.setOnClickListener {
-                launchSearchFragment()
-            }
         }
     }
 
     private fun launchSearchFragment() {
         val searchFragment = SearchFragment.newInstance()
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, searchFragment).addToBackStack(null).commit()
+            .replace(R.id.fragment_container_view, searchFragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

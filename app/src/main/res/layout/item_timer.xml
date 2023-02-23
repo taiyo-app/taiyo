@@ -4,6 +4,7 @@
     android:id="@+id/timeContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
     android:orientation="vertical"
     android:visibility="gone"
     tools:visibility="visible">
@@ -13,8 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/text"
         style="@style/timer_label"
-        tools:text="ДО ВЫХОДА 5 СЕРИИ" />
+        tools:text="До выхода 5 серии" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 style="@style/timer_label"
-                tools:text="ДНЕЙ" />
+                tools:text="Дней" />
 
             <TextView
                 android:id="@+id/hours_label"
@@ -81,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 style="@style/timer_label"
-                tools:text="ЧАСОВ"/>
+                tools:text="Часов"/>
 
             <TextView
                 android:id="@+id/minutes_label"
@@ -89,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 style="@style/timer_label"
-                tools:text="МИНУТ"/>
+                tools:text="Минут"/>
 
             <TextView
                 android:id="@+id/seconds_label"
@@ -97,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 style="@style/timer_label"
-                tools:text="СЕКУНД"/>
+                tools:text="Секунд"/>
 
         </LinearLayout>
 

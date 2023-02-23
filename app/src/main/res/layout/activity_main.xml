@@ -19,11 +19,9 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="78dp"
+        android:layout_height="60dp"
         android:background="@color/ui_bg"
-        android:paddingTop="2dp"
-        android:paddingBottom="10dp"
-        app:itemPaddingTop="12dp"
+        app:itemIconSize="28dp"
         app:itemIconTint="@drawable/navigation_icon_colored"
         app:itemTextColor="@drawable/navigation_text_colored"
         app:itemTextAppearanceActive="@style/BottomNavigationView.Active"

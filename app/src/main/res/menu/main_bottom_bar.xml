@@ -1,10 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/tab_anime"
-        android:icon="@drawable/ic_anime_24"
+        android:icon="@drawable/ic_home_24"
         android:title="@string/anime" />
     <item
         android:id="@+id/tab_home"
         android:icon="@drawable/ic_profile_24"
         android:title="@string/profile" />
+    <item
+        android:id="@+id/tab_manga"
+        android:icon="@drawable/ic_manga_24"
+        android:title="@string/manga" />
 </menu>
