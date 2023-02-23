@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Taiyo β</string>
+    <string name="app_name">Taiyo</string>
 
     // Anime
     <string name="get_recommendations">Аниме/Манга в приложении Taiyo</string>
@@ -28,7 +28,7 @@
     <string name="manga">Манга</string>
 
     // AnimeDetail
-    <string name="next_series_number">ДО ВЫХОДА %s СЕРИИ</string>
+    <string name="next_series_number">До выхода %s серии</string>
     <string name="place_holder_symbol">~</string>
     <string name="rating">Рейтинг</string>
     <string name="place_holder_rating">&#160;/&#160;</string>
@@ -51,6 +51,6 @@
 
     // Detail NavBar
     <string name="description">Описание</string>
-    <string name="watch">Смотреть</string>
+    <string name="watch">Воспроизвести</string>
 
 </resources>

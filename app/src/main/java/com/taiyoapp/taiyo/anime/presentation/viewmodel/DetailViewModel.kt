@@ -49,13 +49,13 @@ class DetailViewModel : ViewModel() {
         }
     }
 
-    fun parseStatus(status: String?): String {
-        return when (status) {
-            "ongoing" -> "Онгоинг"
-            "anons" -> "Скоро"
-            else -> "Завершен"
-        }
-    }
+//    fun parseStatus(status: String?): String {
+//        return when (status) {
+//            "ongoing" -> "Онгоинг"
+//            "anons" -> "Скоро"
+//            else -> "Завершен"
+//        }
+//    }
 
     fun startTimer(timeUntilAiring: Long) {
         if (_animeMedia.value?.Media?.airingSchedule?.nodes != null) {
@@ -79,30 +79,30 @@ class DetailViewModel : ViewModel() {
         val seconds = timeUntilAiring % 86400000 % 3600000 % 60000 / 1000
         // max 7 days
         val daysKey = when (days) {
-            1L -> "ДЕНЬ"
-            in 2..4 -> "ДНЯ"
-            else -> "ДНЕЙ"
+            1L -> "День"
+            in 2..4 -> "Дня"
+            else -> "Дней"
         }
         // max 24 hours
         val hoursKey = when (hours) {
-            1L, 21L -> "ЧАС"
-            in 2..4, !in 0..21 -> "ЧАСА"
-            else -> "ЧАСОВ"
+            1L, 21L -> "Час"
+            in 2..4, !in 0..21 -> "Часа"
+            else -> "Часов"
         }
         // max 60 minutes
         val minutesKey =
             if (minutes == 1L || minutes > 20 && minutes % 10 == 1L)
-                "МИНУТА"
+                "Минута"
             else if (minutes in 2..4 || minutes > 20 && minutes % 10 > 1 && minutes % 10 < 5)
-                "МИНУТЫ"
-            else "МИНУТ"
+                "Минуты"
+            else "Минут"
         // max 60 secs
         val secondsKey =
             if (seconds == 1L || seconds > 20 && seconds % 10 == 1L)
-                "СЕКУНДА"
+                "Секунда"
             else if (seconds in 2..4 || seconds > 20 && seconds % 10 > 1 && seconds % 10 < 5)
-                "СЕКУНДЫ"
-            else "СЕКУНД"
+                "Секунды"
+            else "Секунд"
         val keys = listOf(daysKey, hoursKey, minutesKey, secondsKey)
         val values = listOf(days, hours, minutes, seconds)
         return Pair(keys, values)

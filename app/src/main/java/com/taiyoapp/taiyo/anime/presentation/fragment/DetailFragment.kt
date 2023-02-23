@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.taiyoapp.taiyo.MainActivity
 import com.taiyoapp.taiyo.MediaQuery
 import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.domain.entity.AnimeDetail
-import com.taiyoapp.taiyo.anime.presentation.adapter.ViewPagerAdapter
+import com.taiyoapp.taiyo.anime.presentation.util.indentedText
 import com.taiyoapp.taiyo.anime.presentation.viewmodel.DetailViewModel
 import com.taiyoapp.taiyo.databinding.FragmentDetailBinding
 
@@ -28,15 +25,9 @@ class DetailFragment : Fragment() {
     private val binding: FragmentDetailBinding
         get() = _binding ?: throw RuntimeException("FragmentDetailBinding is null")
 
-    private lateinit var fragmentList: List<Fragment>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         parseArgs()
-        fragmentList = listOf(
-            InfoFragment.newInstance(animeId),
-            WatchFragment.newInstance(animeId)
-        )
     }
 
     override fun onCreateView(
@@ -50,28 +41,12 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bottomNavigationView = (context as MainActivity).findViewById<BottomNavigationView>(
-            R.id.main_bottom_bar
-        )
-        bottomNavigationView.visibility = View.GONE
-        setupViewPager()
         initViewModel()
-        setupFragment()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        requireActivity().window.statusBarColor =
-            ContextCompat.getColor(requireContext(), R.color.bg)
         _binding = null
-    }
-
-    private fun setupFragment() {
-        // StatusBar
-        requireActivity().window.statusBarColor = ContextCompat.getColor(
-            requireContext(),
-            android.R.color.transparent
-        )
     }
 
     private fun initViewModel() {
@@ -105,33 +80,50 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun setupViewPager() {
-        val viewPagerAdapter = ViewPagerAdapter(this, fragmentList)
-        with(binding) {
-            viewPager2.adapter = viewPagerAdapter
-            viewPager2.isUserInputEnabled = false
-            detailBottomBar.setOnItemSelectedListener {
-                when (it.itemId) {
-                    R.id.tab_info -> {
-                        binding.viewPager2.setCurrentItem(0, false)
-                        return@setOnItemSelectedListener true
-                    }
-                    R.id.tab_watch -> {
-                        binding.viewPager2.setCurrentItem(1, false)
-                        return@setOnItemSelectedListener true
-                    }
-                }
-                false
-            }
-        }
-
-    }
-
     private fun setAnimeDetail(animeDetail: AnimeDetail) {
         with(binding) {
-            toolBar.title = animeDetail.russian
-            status.text = viewModel.parseStatus(animeDetail.status)
+            title.text = animeDetail.russian
+            titleEng.text = animeDetail.name
+            bWatch.setOnClickListener {
+                val watchFragment = WatchFragment.newInstance(animeId)
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_view, watchFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
+            with(info) {
+                episodes.text = requireContext().getString(
+                    R.string.episodes,
+                    animeDetail.episodesAired,
+                    animeDetail.episodesTotal
+                )
+                kind.text = viewModel.formatKind(animeDetail.kind)
+                duration.text = viewModel.formatDuration(animeDetail.duration)
+                if (animeDetail.description != null) {
+                    val formattedDescription = viewModel.formatDescription(animeDetail.description)
+                    description.text = indentedText(
+                        formattedDescription,
+                        72,
+                        0
+                    )
+                    description.setOnClickListener {
+                        if (description.maxLines == 5) {
+                            description.maxLines = Int.MAX_VALUE
+                        } else {
+                            description.maxLines = 5
+                        }
+                    }
+                } else {
+                    description.text = indentedText(
+                        requireContext().getString(R.string.empty_description),
+                        72,
+                        0
+                    )
+                }
+                studio.text = viewModel.formatStudio(animeDetail.studios)
+            }
         }
+//            status.text = viewModel.parseStatus(animeDetail.status)
     }
 
     private fun setAnimeMedia(media: MediaQuery.Data) {
@@ -141,6 +133,10 @@ class DetailFragment : Fragment() {
                 .load(media.Media?.coverImage?.extraLarge)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(poster)
+            Glide.with(this@DetailFragment)
+                .load(media.Media?.coverImage?.extraLarge)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(posterBg)
             // init timer
             if (media.Media?.airingSchedule?.nodes?.isEmpty() == false) {
                 val node = media.Media.airingSchedule.nodes[0]
@@ -152,6 +148,14 @@ class DetailFragment : Fragment() {
                 node?.timeUntilAiring?.toLong()?.let { viewModel.startTimer(it) }
             } else {
                 timer.timeContainer.visibility = View.GONE
+            }
+            with(info) {
+                rating.text = viewModel.formatRating(media.Media?.meanScore.toString())
+                ratingContent.text = requireContext().getString(R.string.max_rating)
+                season.text = viewModel.formatSeason(
+                    media.Media?.season?.name,
+                    media.Media?.seasonYear
+                )
             }
         }
     }

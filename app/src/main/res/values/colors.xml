@@ -6,10 +6,9 @@
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="carmine_pink">#ff5c64</color>
-    <color name="violet">#91A6FF</color>
+    <color name="orange">#f47520</color>
 
     <color name="text">@color/black</color>
     <color name="iconColor">#696969</color>
-    <color name="loading">@color/carmine_pink</color>
+    <color name="loading">@color/orange</color>
 </resources>
