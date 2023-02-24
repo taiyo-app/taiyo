@@ -3,34 +3,37 @@ package com.taiyoapp.taiyo.anime.data.network.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class AnimeDetailDto(
+data class DetailShikiDto(
     @SerializedName("id")
     @Expose
     val id: Int,
     @SerializedName("name")
     @Expose
-    val name: String,
+    val name: String?,
     @SerializedName("russian")
     @Expose
-    val russian: String,
+    val russian: String?,
     @SerializedName("kind")
     @Expose
-    val kind: String,
+    val kind: String?,
+    @SerializedName("score")
+    @Expose
+    val score: String?,
     @SerializedName("status")
     @Expose
-    val status: String,
+    val status: String?,
     @SerializedName("episodes")
     @Expose
-    val episodes: String,
+    val episodes: String?,
     @SerializedName("episodes_aired")
     @Expose
-    val episodesAired: String,
-    @SerializedName("released_on")
+    val episodesAired: String?,
+    @SerializedName("aired_on")
     @Expose
-    val releasedOn: String,
+    val airedOn: String?,
     @SerializedName("duration")
     @Expose
-    val duration: Int,
+    val duration: Int?,
     @SerializedName("description")
     @Expose
     val description: String?,
@@ -47,11 +50,11 @@ data class AnimeDetailDto(
     data class GenreDto(
         @SerializedName("russian")
         @Expose
-        val russian: String
+        val russian: String?
     )
     data class StudioDto(
         @SerializedName("name")
         @Expose
-        val name: String
+        val name: String?
     )
 }

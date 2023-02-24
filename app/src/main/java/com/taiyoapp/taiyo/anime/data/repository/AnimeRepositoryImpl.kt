@@ -3,11 +3,9 @@ package com.taiyoapp.taiyo.anime.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.apollographql.apollo3.api.Optional
-import com.taiyoapp.taiyo.MediaQuery
 import com.taiyoapp.taiyo.anime.data.mapper.AnimeMapper
-import com.taiyoapp.taiyo.anime.data.network.anilist.ApolloClientAni
 import com.taiyoapp.taiyo.anime.data.network.kodik.ApiFactoryKodik
+import com.taiyoapp.taiyo.anime.data.network.myanimelist.ApiFactoryMAL
 import com.taiyoapp.taiyo.anime.data.network.shikimori.AnimePageLoader
 import com.taiyoapp.taiyo.anime.data.network.shikimori.AnimePagingSource
 import com.taiyoapp.taiyo.anime.data.network.shikimori.ApiFactoryShiki
@@ -20,7 +18,7 @@ import kotlinx.coroutines.flow.flow
 
 class AnimeRepositoryImpl : AnimeRepository {
     private val apiServiceShiki = ApiFactoryShiki.apiServiceShiki
-    private val apolloClientAni = ApolloClientAni.apolloClientAni
+    private val apiServiceMAL = ApiFactoryMAL.apiServiceMAL
     private val apiServiceKodik = ApiFactoryKodik.apiServiceKodik
     private val mapper = AnimeMapper()
 
@@ -45,28 +43,18 @@ class AnimeRepositoryImpl : AnimeRepository {
         ).flow
     }
 
-    override suspend fun getAnimeDetail(id: Int): Flow<AnimeDetail> {
-        return flow {
-            val animeDetail = mapper.mapAnimeDetailDtoToEntity(
-                apiServiceShiki.getAnimeDetail(id)
-            )
-            emit(animeDetail)
-        }
+    override suspend fun getPoster(id: Int): Flow<String> = flow {
+        val poster = mapper.mapPosterDtoToEntity(
+            apiServiceMAL.getPoster(id)
+        )
+        emit(poster)
     }
 
-    override suspend fun getAnimeMedia(id: Int): MediaQuery.Data {
-        val animeMedia = try {
-            apolloClientAni.query(
-                MediaQuery(
-                    Optional.presentIfNotNull(id)
-                )
-            )
-                .execute()
-                .data
-        } catch (e: Exception) {
-            throw RuntimeException(e.message)
-        }
-        return animeMedia ?: MediaQuery.Data(null)
+    override suspend fun getAnimeDetail(id: Int): Flow<AnimeDetail> = flow {
+        val animeDetail = mapper.mapAnimeDetailDtoToEntity(
+            apiServiceShiki.getAnimeDetail(id)
+        )
+        emit(animeDetail)
     }
 
     override suspend fun getEpisodeList(id: Int): List<Result> {

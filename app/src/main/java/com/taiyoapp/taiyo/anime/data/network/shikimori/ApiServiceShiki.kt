@@ -1,6 +1,6 @@
 package com.taiyoapp.taiyo.anime.data.network.shikimori
 
-import com.taiyoapp.taiyo.anime.data.network.model.AnimeDetailDto
+import com.taiyoapp.taiyo.anime.data.network.model.DetailShikiDto
 import com.taiyoapp.taiyo.anime.data.network.model.AnimeDto
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -17,7 +17,7 @@ interface ApiServiceShiki {
     @GET("animes/{id}")
     suspend fun getAnimeDetail(
         @Path(QUERY_PARAM_ID) id: Int
-    ): AnimeDetailDto
+    ): DetailShikiDto
 
     companion object {
         // requirement
