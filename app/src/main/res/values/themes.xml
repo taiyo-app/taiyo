@@ -3,9 +3,9 @@
     <style name="Theme.Taiyo" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/orange</item>
-        <item name="colorOnPrimary">#7596e8</item>
+        <item name="colorOnPrimary">@color/green</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#7596e8</item>
+        <item name="colorSecondary">@color/green</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:windowLightStatusBar">true</item>

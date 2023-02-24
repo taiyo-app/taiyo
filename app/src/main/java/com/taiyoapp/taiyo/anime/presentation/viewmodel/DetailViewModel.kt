@@ -5,28 +5,26 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.taiyoapp.taiyo.MediaQuery
-import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.data.repository.AnimeRepositoryImpl
 import com.taiyoapp.taiyo.anime.domain.entity.AnimeDetail
 import com.taiyoapp.taiyo.anime.domain.usecase.GetAnimeDetailUseCase
-import com.taiyoapp.taiyo.anime.domain.usecase.GetAnimeMediaUseCase
+import com.taiyoapp.taiyo.anime.domain.usecase.GetPosterUseCase
+import com.taiyoapp.taiyo.anime.presentation.util.DateFormatter
 import kotlinx.coroutines.launch
-import java.util.regex.Pattern
 
 class DetailViewModel : ViewModel() {
     private val repository = AnimeRepositoryImpl()
 
     private val getAnimeDetailUseCase = GetAnimeDetailUseCase(repository)
-    private val getAnimeMediaUseCase = GetAnimeMediaUseCase(repository)
+    private val getPosterUseCase = GetPosterUseCase(repository)
+
+    private var _poster = MutableLiveData<String>()
+    val poster: LiveData<String>
+        get() = _poster
 
     private var _animeDetail = MutableLiveData<AnimeDetail>()
     val animeDetail: LiveData<AnimeDetail>
         get() = _animeDetail
-
-    private var _animeMedia = MutableLiveData<MediaQuery.Data?>()
-    val animeMedia: LiveData<MediaQuery.Data?>
-        get() = _animeMedia
 
     private var timer: CountDownTimer? = null
 
@@ -34,69 +32,56 @@ class DetailViewModel : ViewModel() {
     val formattedTime: LiveData<Pair<List<String>, List<Long>>>
         get() = _formattedTime
 
+    fun loadPoster(id: Int) {
+        viewModelScope.launch {
+            getPosterUseCase(id)
+                .collect {
+                    _poster.postValue(it)
+                }
+        }
+    }
+
     fun loadAnimeDetail(id: Int) {
         viewModelScope.launch {
             getAnimeDetailUseCase(id)
                 .collect {
-                    _animeDetail.value = it
+                    _animeDetail.postValue(it)
                 }
         }
     }
-
-    fun loadAnimeMedia(id: Int) {
-        viewModelScope.launch {
-            _animeMedia.postValue(getAnimeMediaUseCase(id))
-        }
-    }
-
-//    fun parseStatus(status: String?): String {
-//        return when (status) {
-//            "ongoing" -> "Онгоинг"
-//            "anons" -> "Скоро"
-//            else -> "Завершен"
-//        }
-//    }
 
     fun startTimer(timeUntilAiring: Long) {
-        if (_animeMedia.value?.Media?.airingSchedule?.nodes != null) {
-            val milliseconds = timeUntilAiring * 1000L
-            timer = object : CountDownTimer(milliseconds, 1000) {
-                override fun onTick(timeUntilAiring: Long) {
-                    _formattedTime.value = formatTime(timeUntilAiring)
-                }
-
-                override fun onFinish() {}
+        val milliseconds = timeUntilAiring * 1000L
+        timer = object : CountDownTimer(milliseconds, 1000) {
+            override fun onTick(timeUntilAiring: Long) {
+                _formattedTime.value = formatTime(timeUntilAiring)
             }
-            timer?.start()
+            override fun onFinish() {}
         }
+        timer?.start()
     }
 
-    // PRESS "F"
     fun formatTime(timeUntilAiring: Long): Pair<List<String>, List<Long>> {
         val days = timeUntilAiring / 86400000
         val hours = timeUntilAiring % 86400000 / 3600000
         val minutes = timeUntilAiring % 86400000 % 3600000 / 60000
         val seconds = timeUntilAiring % 86400000 % 3600000 % 60000 / 1000
-        // max 7 days
         val daysKey = when (days) {
             1L -> "День"
             in 2..4 -> "Дня"
             else -> "Дней"
         }
-        // max 24 hours
         val hoursKey = when (hours) {
             1L, 21L -> "Час"
             in 2..4, !in 0..21 -> "Часа"
             else -> "Часов"
         }
-        // max 60 minutes
         val minutesKey =
             if (minutes == 1L || minutes > 20 && minutes % 10 == 1L)
                 "Минута"
             else if (minutes in 2..4 || minutes > 20 && minutes % 10 > 1 && minutes % 10 < 5)
                 "Минуты"
             else "Минут"
-        // max 60 secs
         val secondsKey =
             if (seconds == 1L || seconds > 20 && seconds % 10 == 1L)
                 "Секунда"
@@ -108,62 +93,13 @@ class DetailViewModel : ViewModel() {
         return Pair(keys, values)
     }
 
-    fun formatRating(rating: String?): String {
-        return if (rating != null) {
-            "${rating[0]}.${rating[1]}"
+    fun formatAiredOn(airedOn: String): String {
+        val formattedDate = DateFormatter.formatAiredOn(airedOn)
+        return if (formattedDate[0] in '0'..'9') {
+            formattedDate
         } else {
-            "${R.string.episodes_separator}"
+            formattedDate.substring(0, 1).uppercase() + formattedDate.substring(1)
         }
-    }
-
-    fun formatKind(kind: String?): String {
-        return when (kind) {
-            "tv" -> "Сериал"
-            "movie" -> "Фильм"
-            else -> "${R.string.place_holder_symbol}"
-        }
-    }
-
-    fun formatDuration(duration: Int?): String {
-        return if (duration != null) {
-            val hours = duration / 60
-            val minutes = duration % 60
-            if (hours > 0) {
-                "$hours ч. $minutes мин."
-            } else {
-                "$minutes мин."
-            }
-        } else {
-            "${R.string.place_holder_symbol}"
-        }
-    }
-
-    fun formatStudio(studios: List<AnimeDetail.Studio>?) =
-        studios?.get(0)?.name ?: "${R.string.place_holder_symbol}"
-
-    fun formatSeason(season: String?, seasonYear: Int?): String {
-        return if (season != null && seasonYear != null) {
-            val translateSeason = when (season) {
-                "WINTER" -> "Зима"
-                "SPRING" -> "Весна"
-                "SUMMER" -> "Лето"
-                else -> "Осень"
-            }
-            "$translateSeason $seasonYear"
-        } else {
-            "${R.string.place_holder_symbol}"
-        }
-    }
-
-    fun formatDescription(description: String): String {
-        val stringBuffer = StringBuffer()
-        val patternSeparator = Pattern.compile("\\[.*?]|\r\n\r")
-        val matcher = patternSeparator.matcher(description)
-        while (matcher.find()) {
-            matcher.appendReplacement(stringBuffer, "")
-        }
-        matcher.appendTail(stringBuffer)
-        return stringBuffer.toString()
     }
 
     override fun onCleared() {

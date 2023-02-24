@@ -13,6 +13,7 @@ import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.AnonsViewHolder
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.OngoingsViewHolder
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.ReleasedViewHolder
+import com.taiyoapp.taiyo.anime.presentation.util.DateFormatter
 import com.taiyoapp.taiyo.databinding.ItemAnonsBinding
 import com.taiyoapp.taiyo.databinding.ItemOngoingsBinding
 import com.taiyoapp.taiyo.databinding.ItemReleasedBinding
@@ -39,7 +40,7 @@ class SearchAdapter(
                                 .transition(DrawableTransitionOptions.withCrossFade())
                                 .into(sivPoster)
                             tvTitle.text = it.title
-                            tvEpisodesAired.text = it.episodesAired.toString()
+                            tvEpisodesAired.text = it.episodesAired
                             tvEpisodesTotal.text = context.getString(
                                 R.string.ongoings_episodes,
                                 episodesTotal
@@ -56,7 +57,7 @@ class SearchAdapter(
                                 .transition(DrawableTransitionOptions.withCrossFade())
                                 .into(sivPoster)
                             tvTitle.text = it.title
-                            tvDate.text = context.getString(R.string.soon)
+                            tvDate.text = DateFormatter.formatAiredOn(it.airedOn)
                             root.setOnClickListener { onAnimeClick?.invoke(this) }
                         }
                     }

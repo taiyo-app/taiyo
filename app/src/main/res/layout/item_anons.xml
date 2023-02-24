@@ -51,19 +51,17 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textSize="14sp"
-            android:fontFamily="@font/roboto_regular"
-            android:transitionName="mediaTitle"
-            tools:text="@string/get_recommendations"
-            tools:ignore="SpUsage" />
+            android:textSize="13sp"
+            android:fontFamily="@font/roboto_medium"
+            tools:text="@string/get_recommendations" />
 
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:textSize="14sp"
-                android:textColor="?attr/colorSecondary"
+                android:textSize="13sp"
+                android:alpha="0.6"
                 tools:text="скоро" />
 
     </LinearLayout>

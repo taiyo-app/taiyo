@@ -3,7 +3,7 @@
 
     // Anime
     <string name="get_recommendations">Аниме/Манга в приложении Taiyo</string>
-    <string name="episodes_separator">&#160;|&#160;</string>
+    <string name="episodes_separator">&#160;из&#160;</string>
     <string name="ongoings_episodes">%s эп</string>
     <string name="soon">скоро</string>
 
@@ -52,5 +52,7 @@
     // Detail NavBar
     <string name="description">Описание</string>
     <string name="watch">Воспроизвести</string>
+    <string name="status">Статус</string>
+    <string name="aired_on">Дата выхода</string>
 
 </resources>

@@ -1,7 +1,6 @@
 package com.taiyoapp.taiyo.anime.domain.repository
 
 import androidx.paging.PagingData
-import com.taiyoapp.taiyo.MediaQuery
 import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.domain.entity.AnimeDetail
 import com.taiyoapp.taiyo.anime.domain.entity.EpisodeList
@@ -12,7 +11,7 @@ interface AnimeRepository {
 
     suspend fun getAnimeDetail(id: Int): Flow<AnimeDetail>
 
-    suspend fun getAnimeMedia(id: Int): MediaQuery.Data
+    suspend fun getPoster(id: Int): Flow<String>
 
     suspend fun getEpisodeList(id: Int): List<EpisodeList.Result>
 }
