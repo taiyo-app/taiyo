@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-8dp"
             app:tabMode="scrollable"
+            app:tabTextColor="@color/text"
             app:tabTextAppearance="@style/TabText"
             app:tabIndicator="@drawable/tab_indicator"
             tools:ignore="SpeakableTextPresentCheck">

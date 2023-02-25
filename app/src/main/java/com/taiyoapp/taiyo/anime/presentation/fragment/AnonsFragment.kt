@@ -15,6 +15,7 @@ import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.presentation.adapter.AnonsAdapter
 import com.taiyoapp.taiyo.anime.presentation.adapter.MainLoadStateAdapter
 import com.taiyoapp.taiyo.anime.presentation.adapter.RefreshAction
+import com.taiyoapp.taiyo.anime.presentation.util.MarginItemDecoration
 import com.taiyoapp.taiyo.anime.presentation.util.simpleScan
 import com.taiyoapp.taiyo.anime.presentation.viewmodel.AnonsViewModel
 import com.taiyoapp.taiyo.databinding.FragmentAnimeListBinding
@@ -91,6 +92,9 @@ class AnonsFragment : Fragment() {
         with(binding) {
             rvAnime.adapter = adapterWithLoadState
             rvAnime.layoutManager = layoutManager
+            rvAnime.addItemDecoration(
+                MarginItemDecoration(12, spanCount, layoutManager.orientation)
+            )
         }
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {

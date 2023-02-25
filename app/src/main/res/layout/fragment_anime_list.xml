@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/bg"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -14,6 +15,8 @@
             android:id="@+id/rv_anime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="6dp"
+            android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
             tools:listitem="@layout/item_ongoings"/>

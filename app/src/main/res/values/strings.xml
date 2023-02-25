@@ -51,7 +51,7 @@
 
     // Detail NavBar
     <string name="description">Описание</string>
-    <string name="watch">Воспроизвести</string>
+    <string name="watch">Cмотреть</string>
     <string name="status">Статус</string>
     <string name="aired_on">Дата выхода</string>
 

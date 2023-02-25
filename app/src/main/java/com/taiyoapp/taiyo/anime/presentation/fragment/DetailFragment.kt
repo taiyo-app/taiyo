@@ -62,19 +62,6 @@ class DetailFragment : Fragment() {
         viewModel.animeDetail.observe(viewLifecycleOwner) {
             setAnimeDetail(it)
         }
-        viewModel.formattedTime.observe(viewLifecycleOwner) {
-            val pair = it
-            val keys = pair.first
-            val values = pair.second
-            with(binding) {
-                with(timer) {
-                    daysLabel.text = keys[0]; days.text = values[0].toString()
-                    hoursLabel.text = keys[1]; hours.text = values[1].toString()
-                    minutesLabel.text = keys[2]; minutes.text = values[2].toString()
-                    secondsLabel.text = keys[3]; seconds.text = values[3].toString()
-                }
-            }
-        }
     }
 
     private fun setPoster(poster: String) {
@@ -92,6 +79,13 @@ class DetailFragment : Fragment() {
         with(binding) {
             title.text = animeDetail.russian
             titleEng.text = animeDetail.name
+            if (animeDetail.score != "~") {
+                llScore.visibility = View.VISIBLE
+                rbScore.rating = animeDetail.score.toFloat() / 2
+                score.text = animeDetail.score
+            } else {
+                llScore.visibility = View.GONE
+            }
             bWatch.setOnClickListener {
                 val watchFragment = WatchFragment.newInstance(animeId)
                 requireActivity().supportFragmentManager.beginTransaction()
@@ -100,19 +94,18 @@ class DetailFragment : Fragment() {
                     .commit()
             }
             // init timer
-            if (animeDetail.nextEpisodeAt != 2000L) {
+            if (animeDetail.nextEpisodeAt != -1L) {
                 timer.timeContainer.visibility = View.VISIBLE
+                val nextSeriesNumber = animeDetail.episodesAired.toInt() + 1
                 timer.nextSeriesNumber.text = requireContext().getString(
                     R.string.next_series_number,
-                    animeDetail.episodesAired
+                    nextSeriesNumber.toString()
                 )
-                viewModel.startTimer(animeDetail.nextEpisodeAt)
+                binding.timer.timerProgramCountdown.startCountDown(animeDetail.nextEpisodeAt)
             } else {
                 timer.timeContainer.visibility = View.GONE
             }
             with(info) {
-                score.text = animeDetail.score
-                scoreContent.text = requireContext().getString(R.string.max_rating)
                 status.text = animeDetail.status
                 episodes.text = requireContext().getString(
                     R.string.episodes,

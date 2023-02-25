@@ -14,6 +14,8 @@
             android:id="@+id/rv_anime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="6dp"
+            android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="6"
             tools:listitem="@layout/item_ongoings"/>

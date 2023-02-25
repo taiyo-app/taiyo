@@ -7,7 +7,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.MoviesViewHolder
 import com.taiyoapp.taiyo.databinding.ItemMoviesBinding
@@ -36,7 +35,6 @@ class MoviesAdapter(
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(sivPoster)
                     tvTitle.text = it.title
-                    tvEpisodesTotal.text = context.getString(R.string.ongoings_episodes, episodesTotal)
                     root.setOnClickListener { onAnimeClick?.invoke(this) }
                 }
             }
