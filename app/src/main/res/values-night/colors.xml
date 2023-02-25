@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg">#121212</color>
+    <color name="bg">#000000</color>
     <color name="alter_bg">@color/white</color>
-    <color name="ui_bg">#282828</color>
+    <color name="ui_bg">#24252a</color>
 
     <color name="text">@color/white</color>
-    <color name="iconColor">#757575</color>
+    <color name="iconColor">@color/white</color>
     <color name="loading">#e0e0e0</color>
 </resources>

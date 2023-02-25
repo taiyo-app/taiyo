@@ -1,195 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:scrollbars="none">
+    android:background="@color/bg">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/b_watch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        app:backgroundTint="@color/orange"
+        app:srcCompat="@drawable/ic_play_24"
+        app:borderWidth="0dp"
+        app:tint="@color/white"
+        app:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/b_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        app:borderWidth="0dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayExtended"
+        style="style/ShapeAppearanceOverlayExtended"
+        app:backgroundTint="@color/ui_bg"
+        app:srcCompat="@drawable/ic_back_24"
+        app:fabCustomSize="42dp"
+        app:tint="@color/iconColor"
+        app:elevation="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/gl_poster"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="380dp" />
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/ui_bg"
-            app:fabCustomSize="42dp"
-            app:srcCompat="@drawable/ic_back_24"
-            app:tint="@color/iconColor"
-            app:elevation="2dp"
-            app:borderWidth="0dp"
-            app:shapeAppearanceOverlay="@style/fab_circle"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/gl_poster">
-
-            <ImageView
-                android:id="@+id/poster_bg"
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_poster"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0.15"
-                android:scaleType="centerCrop"
-                tools:srcCompat="@tools:sample/backgrounds/scenic"
-                tools:ignore="contentDescription" />
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="380dp" />
 
-            <ImageView
-                android:id="@+id/gradient_top"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_gravity="top"
-                android:background="@drawable/gradient_top_background"
-                app:layout_collapseParallaxMultiplier="0"
-                tools:ignore="ContentDescription,ImageContrastCheck" />
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/gl_poster">
 
-            <ImageView
-                android:id="@+id/gradient_bottom"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_gravity="bottom"
-                android:background="@drawable/gradient_bottom_background"
-                tools:ignore="ContentDescription,ImageContrastCheck" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="8dp"
-                android:layout_marginHorizontal="72dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="16dp">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/poster"
+                <ImageView
+                    android:id="@+id/poster_bg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:alpha="0.15"
                     android:scaleType="centerCrop"
-                    tools:ignore="ContentDescription,ImageContrastCheck"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    tools:srcCompat="@tools:sample/backgrounds/scenic"
+                    tools:ignore="contentDescription" />
 
-            </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/gradient_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="top"
+                    android:background="@drawable/gradient_top_background"
+                    app:layout_collapseParallaxMultiplier="0"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
 
-        </FrameLayout>
+                <ImageView
+                    android:id="@+id/gradient_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/gradient_bottom_background"
+                    tools:ignore="ContentDescription,ImageContrastCheck" />
 
-        <ImageButton
-            android:id="@+id/ib_info"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@color/bg"
-            android:layout_marginTop="2dp"
-            android:layout_marginStart="14dp"
-            app:srcCompat="@drawable/ic_info"
-            app:layout_constraintTop_toBottomOf="@id/gl_poster"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="8dp"
+                    android:layout_marginHorizontal="72dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="16dp">
 
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/poster"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        tools:ignore="ContentDescription,ImageContrastCheck"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <LinearLayout
-            android:id="@+id/ll_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="48dp"
-            app:layout_constraintTop_toBottomOf="@id/gl_poster"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+                </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/title"
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="19sp"
-                android:textColor="@color/text"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:fontFamily="@font/roboto_black"
-                tools:text="@string/get_recommendations"
-                app:layout_constraintTop_toBottomOf="@+id/gl_poster"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:orientation="vertical"
+                android:layout_marginHorizontal="32dp"
+                app:layout_constraintTop_toBottomOf="@id/gl_poster"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-            <TextView
-                android:id="@+id/title_eng"
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@color/text"
+                    android:gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:fontFamily="@font/roboto_bold"
+                    tools:text="@string/get_recommendations"
+                    app:layout_constraintTop_toBottomOf="@+id/gl_poster"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/title_eng"
+                    style="@style/info_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    app:layout_constraintTop_toBottomOf="@+id/title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="@string/get_recommendations" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                style="@style/info_value"
-                android:alpha="0.6"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:fontFamily="@font/roboto_regular"
-                tools:text="@string/get_recommendations"
-                app:layout_constraintTop_toBottomOf="@+id/title"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/ll_title"
+                app:layout_constraintStart_toStartOf="@id/ll_title"
+                app:layout_constraintEnd_toEndOf="@id/ll_title"
+                tools:visibility="visible" >
+
+                <RatingBar
+                    android:id="@+id/rb_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:scaleX="1.25"
+                    android:scaleY="1.25"
+                    android:theme="@style/customRatingBar"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:rating="5"
+                    tools:rating="4.5" />
+
+                <TextView
+                    android:id="@+id/score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/roboto_medium"
+                    tools:text="8.4" />
+
+            </LinearLayout>
+
+            <include
+                android:id="@+id/timer"
+                layout="@layout/item_timer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/ll_score"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-        </LinearLayout>
+            <include
+                android:id="@+id/info"
+                layout="@layout/item_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/timer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/b_watch"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/watch"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:iconTint="@color/white"
-            app:iconGravity="textStart"
-            app:icon="@drawable/ic_play_24"
-            android:textSize="16sp"
-            android:letterSpacing="0"
-            android:fontFamily="@font/roboto_medium"
-            app:cornerRadius="24dp"
-            app:layout_constraintTop_toBottomOf="@id/ll_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <include
-            android:id="@+id/timer"
-            layout="@layout/item_timer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/b_watch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+    </ScrollView>
 
-        <include
-            android:id="@+id/info"
-            layout="@layout/item_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/timer"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</ScrollView>
 
 
 

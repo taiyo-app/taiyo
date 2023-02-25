@@ -1,18 +1,17 @@
 package com.taiyoapp.taiyo.anime.presentation.util
 
 import android.os.Build
-import android.util.Log
+import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.ZoneOffset
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
 
 object DateFormatter {
     fun formatAiredOn(airedOn: String?): String {
-        return if (airedOn != null) {
+        return if (airedOn != null && airedOn != "~") {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
                 val date = LocalDate.parse(airedOn, formatter)
@@ -53,22 +52,27 @@ object DateFormatter {
         }
     }
 
-    // TODO: неправильно отображается время
     fun formatNextEpisodeAt(nextEpisodeAt: String?): Long {
         return if (nextEpisodeAt != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val myDate = "2023-02-25T11:30:00.000+03:00"
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSz")
-                val date = LocalDateTime.parse(myDate, formatter)
-                Log.d("Milli", date.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli().toString())
-                Log.d("Milli", System.currentTimeMillis().toString())
-                return date.atOffset(ZoneOffset.UTC).toInstant().toEpochMilli() - System.currentTimeMillis()
+                val formattedTime = nextEpisodeAt.toDateISO_8601()
+                    .toEpochSecond() * 1000 - System.currentTimeMillis()
+                return if (formattedTime > 0) {
+                    formattedTime
+                } else {
+                    invalidTime
+                }
             } else {
-                2000
+                invalidTime
             }
         } else {
-            2000
+            invalidTime
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun String.toDateISO_8601(): ZonedDateTime {
+        return ZonedDateTime.parse(this, DateTimeFormatter.ISO_DATE_TIME)
     }
 
     private val summer = arrayOf("JUNE", "JULY", "AUGUST")
@@ -77,5 +81,6 @@ object DateFormatter {
     private val spring = arrayOf("MARCH", "APRIL", "MAY")
 
     private val locale = Locale("ru")
+    private const val invalidTime = -1L
 }
 

@@ -6,51 +6,13 @@
     android:paddingHorizontal="16dp">
 
     <TextView
-        android:id="@+id/score_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rating"
-        style="@style/info_label"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/place_holder_symbol"
-        style="@style/info_value"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/rating_place_holder" />
-
-    <TextView
-        android:id="@+id/rating_place_holder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/place_holder_rating"
-        android:textSize="18sp"
-        style="@style/info_value"
-        android:includeFontPadding="false"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/score_content" />
-
-    <TextView
-        android:id="@+id/score_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/place_holder_symbol"
-        style="@style/info_value"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/place_holder_symbol"
         style="@style/info_value"
-        app:layout_constraintTop_toBottomOf="@id/score_label"
+        app:layout_constraintTop_toBottomOf="@id/description"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -61,7 +23,7 @@
         android:text="@string/status"
         style="@style/info_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/score_label" />
+        app:layout_constraintTop_toBottomOf="@id/description" />
 
     <TextView
         android:id="@+id/episodes_label"
@@ -167,18 +129,17 @@
         android:id="@+id/description_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/description"
         android:textSize="16sp"
         android:fontFamily="@font/roboto_medium"
-        app:layout_constraintTop_toBottomOf="@id/aired_on_label"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:maxLines="5"
         android:lineSpacingExtra="6dp"
         android:ellipsize="end"
@@ -188,5 +149,15 @@
         app:layout_constraintTop_toBottomOf="@id/description_label"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/description"
+        android:textSize="16sp"
+        android:fontFamily="@font/roboto_medium"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
