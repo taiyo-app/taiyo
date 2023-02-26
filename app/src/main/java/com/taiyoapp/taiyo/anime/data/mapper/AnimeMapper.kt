@@ -1,42 +1,38 @@
 package com.taiyoapp.taiyo.anime.data.mapper
 
-import com.taiyoapp.taiyo.R
-import com.taiyoapp.taiyo.anime.data.network.model.AnimeDto
-import com.taiyoapp.taiyo.anime.data.network.model.DetailMALDto
-import com.taiyoapp.taiyo.anime.data.network.model.DetailShikiDto
-import com.taiyoapp.taiyo.anime.data.network.model.EpisodeListDto
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonElement
+import com.taiyoapp.taiyo.anime.data.network.model.*
 import com.taiyoapp.taiyo.anime.data.network.model.EpisodeListDto.*
-import com.taiyoapp.taiyo.anime.domain.entity.Anime
-import com.taiyoapp.taiyo.anime.domain.entity.AnimeDetail
-import com.taiyoapp.taiyo.anime.domain.entity.EpisodeList
+import com.taiyoapp.taiyo.anime.domain.entity.*
 import com.taiyoapp.taiyo.anime.presentation.util.DateFormatter
 import java.util.regex.Pattern
 
 class AnimeMapper {
     fun mapAnimeDtoToEntity(animeDto: AnimeDto) = Anime(
         id = animeDto.id,
-        title = animeDto.russian ?: "~",
+        title = animeDto.russian ?: EMPTY_VALUE,
         image = BASE_IMAGE_URL + animeDto.animeImageDto?.original,
-        status = animeDto.status ?: "~",
-        episodesAired = animeDto.episodesAired ?: "~",
-        episodesTotal = formatEpisodeTotal(animeDto.episodes ?: "~") ,
-        airedOn = animeDto.airedOn ?: "~"
+        status = animeDto.status ?: EMPTY_VALUE,
+        episodesAired = animeDto.episodesAired ?: EMPTY_VALUE,
+        episodesTotal = formatEpisodeTotal(animeDto.episodes ?: EMPTY_VALUE) ,
+        airedOn = animeDto.airedOn ?: EMPTY_VALUE
     )
 
     private fun formatEpisodeTotal(
         episodesTotal: String,
-    ) = if (episodesTotal == "0") "~" else episodesTotal
+    ) = if (episodesTotal == "0") EMPTY_VALUE else episodesTotal
 
     fun mapAnimeDetailDtoToEntity(detailShikiDto: DetailShikiDto) = AnimeDetail(
         id = detailShikiDto.id,
-        name = detailShikiDto.name ?: "~",
-        russian = detailShikiDto.russian ?: "~",
+        name = detailShikiDto.name ?: EMPTY_VALUE,
+        russian = detailShikiDto.russian ?: EMPTY_VALUE,
         kind = formatKind(detailShikiDto.kind),
         score = formatScore(detailShikiDto.score),
         status = formatStatus(detailShikiDto.status),
-        episodesAired = detailShikiDto.episodesAired ?: "~",
-        episodesTotal = formatEpisodeTotal(detailShikiDto.episodes ?: "~"),
-        airedOn = detailShikiDto.airedOn ?: "~",
+        episodesAired = detailShikiDto.episodesAired ?: EMPTY_VALUE,
+        episodesTotal = formatEpisodeTotal(detailShikiDto.episodes ?: EMPTY_VALUE),
+        airedOn = detailShikiDto.airedOn ?: EMPTY_VALUE,
         duration = formatDuration(detailShikiDto.duration),
         description = formatDescription(detailShikiDto.description),
         nextEpisodeAt = DateFormatter.formatNextEpisodeAt(detailShikiDto.nextEpisodeAt),
@@ -44,22 +40,49 @@ class AnimeMapper {
         studio = formatStudios(detailShikiDto.studios)
     )
 
+    fun mapJsonArrayVideoDtoToEntity(jsonElement: JsonElement): List<Video> {
+        val jsonArray = jsonElement.asJsonArray
+        val videoList = mutableListOf<Video>()
+        for (jsonElementItem in jsonArray) {
+            val jsonObject = jsonElementItem.asJsonObject
+            val gson = GsonBuilder().create()
+            val videoItem = mapVideoDtoToEntity(
+                gson.fromJson(
+                    jsonObject,
+                    VideoDto::class.java
+                )
+            )
+            videoList.add(videoItem)
+        }
+        return videoList
+    }
+
+    private fun mapVideoDtoToEntity(videoDto: VideoDto) = Video(
+        id = videoDto.id,
+        url = videoDto.url ?: EMPTY_VALUE,
+        imageUrl = videoDto.imageUrl ?: EMPTY_VALUE,
+        playerUrl = videoDto.playerUrl ?: EMPTY_VALUE,
+        name = videoDto.playerUrl ?: EMPTY_VALUE,
+        kind = videoDto.kind ?: EMPTY_VALUE,
+        hosting = videoDto.hosting ?: EMPTY_VALUE
+    )
+
     private fun mapGenreDtoToEntity(
         genres: List<DetailShikiDto.GenreDto>,
     ): List<String> {
-        return genres.map { it.russian ?: "~" }
+        return genres.map { it.russian ?: EMPTY_VALUE }
     }
 
     private fun mapStudioDtoToEntity(
         studios: List<DetailShikiDto.StudioDto>?,
     ): List<String>? {
-        return studios?.map { it.name ?: "~" }
+        return studios?.map { it.name ?: EMPTY_VALUE }
     }
 
     fun mapPosterDtoToEntity(
         detailMALDto: DetailMALDto,
     ): String {
-        return detailMALDto.mainPicture.large ?: "~"
+        return detailMALDto.mainPicture.large ?: EMPTY_VALUE
     }
 
     fun mapEpisodeListDtoToEntity(episodeListDto: EpisodeListDto) = EpisodeList(
@@ -91,9 +114,9 @@ class AnimeMapper {
 
     private fun formatScore(score: String?): String {
         return if (score == "0.0") {
-            "~"
+            EMPTY_VALUE
         } else {
-            score?.take(3) ?: "~"
+            score?.take(3) ?: EMPTY_VALUE
         }
     }
 
@@ -101,13 +124,13 @@ class AnimeMapper {
         "ongoing" -> "Онгоинг"
         "anons" -> "Анонс"
         "released" -> "Завершен"
-        else -> "~"
+        else -> EMPTY_VALUE
     }
 
     private fun formatKind(kind: String?) = when (kind) {
         "tv" -> "Сериал"
         "movie" -> "Фильм"
-        else -> "~"
+        else -> EMPTY_VALUE
     }
 
     private fun formatDuration(duration: Int?): String {
@@ -116,17 +139,19 @@ class AnimeMapper {
             val minutes = duration % 60
             if (hours > 0) {
                 "$hours ч. $minutes мин."
+            } else if (minutes == 0) {
+                "$EMPTY_VALUE мин."
             } else {
                 "$minutes мин."
             }
         } else {
-            "${R.string.place_holder_symbol}"
+            EMPTY_VALUE
         }
     }
 
     private fun formatStudios(studios: List<DetailShikiDto.StudioDto>?): String {
         val studioList = mapStudioDtoToEntity(studios)
-        return studioList?.get(0) ?: "${R.string.place_holder_symbol}"
+        return studioList?.get(0) ?: EMPTY_VALUE
     }
 
     private fun formatDescription(description: String?): String {
@@ -146,5 +171,7 @@ class AnimeMapper {
 
     companion object {
         private const val BASE_IMAGE_URL = "https://shikimori.one"
+
+        private const val EMPTY_VALUE = "~"
     }
 }

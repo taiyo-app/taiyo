@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.domain.entity.AnimeDetail
 import com.taiyoapp.taiyo.anime.domain.entity.EpisodeList
+import com.taiyoapp.taiyo.anime.domain.entity.Video
 import kotlinx.coroutines.flow.Flow
 
 interface AnimeRepository {
@@ -12,6 +13,8 @@ interface AnimeRepository {
     suspend fun getAnimeDetail(id: Int): Flow<AnimeDetail>
 
     suspend fun getPoster(id: Int): Flow<String>
+
+    suspend fun getVideo(id: Int): Flow<List<Video>>
 
     suspend fun getEpisodeList(id: Int): List<EpisodeList.Result>
 }

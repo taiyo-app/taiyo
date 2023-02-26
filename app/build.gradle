@@ -65,6 +65,8 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.44.2'
     // Timer
     implementation 'com.github.anugotta:FlipTimerView:v1.5'
+    // Sectioned RecyclerView
+    implementation 'com.github.luizgrp:SectionedRecyclerViewAdapter:v3.2.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

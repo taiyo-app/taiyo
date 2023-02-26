@@ -22,12 +22,11 @@
         flipTimer:layout_constraintEnd_toEndOf="parent"
         tools:text="До выхода 5 серии" />
 
-
     <com.asp.fliptimerviewlibrary.CountDownClock
         android:id="@+id/timerProgramCountdown"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="6dp"
         android:layout_gravity="center"
         flipTimer:almostFinishedCallbackTimeInSeconds="5"
         flipTimer:animationDuration="850"
@@ -43,5 +42,45 @@
         flipTimer:layout_constraintTop_toBottomOf="@id/next_series_number"
         flipTimer:layout_constraintStart_toStartOf="parent"
         flipTimer:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="14dp"
+        android:orientation="horizontal"
+        flipTimer:layout_constraintTop_toBottomOf="@id/timerProgramCountdown"
+        flipTimer:layout_constraintStart_toStartOf="@id/timerProgramCountdown"
+        flipTimer:layout_constraintEnd_toEndOf="@id/timerProgramCountdown">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="@string/Days"
+            style="@style/timer_label"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="@string/Hours"
+            style="@style/timer_label"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="@string/Mins"
+            style="@style/timer_label"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.75"
+            android:text="@string/Secs"
+            style="@style/timer_label"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

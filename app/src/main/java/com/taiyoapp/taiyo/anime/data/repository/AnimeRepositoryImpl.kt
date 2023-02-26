@@ -12,6 +12,7 @@ import com.taiyoapp.taiyo.anime.data.network.shikimori.ApiFactoryShiki
 import com.taiyoapp.taiyo.anime.domain.entity.Anime
 import com.taiyoapp.taiyo.anime.domain.entity.AnimeDetail
 import com.taiyoapp.taiyo.anime.domain.entity.EpisodeList.Result
+import com.taiyoapp.taiyo.anime.domain.entity.Video
 import com.taiyoapp.taiyo.anime.domain.repository.AnimeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -48,6 +49,13 @@ class AnimeRepositoryImpl : AnimeRepository {
             apiServiceMAL.getPoster(id)
         )
         emit(poster)
+    }
+
+    override suspend fun getVideo(id: Int): Flow<List<Video>> = flow {
+        val videoList = mapper.mapJsonArrayVideoDtoToEntity(
+            apiServiceShiki.getVideo(id)
+        ).filter { video -> video.hosting != "vk" }
+        emit(videoList.toList())
     }
 
     override suspend fun getAnimeDetail(id: Int): Flow<AnimeDetail> = flow {
