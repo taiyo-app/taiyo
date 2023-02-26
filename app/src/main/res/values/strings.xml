@@ -54,5 +54,8 @@
     <string name="watch">Cмотреть</string>
     <string name="status">Статус</string>
     <string name="aired_on">Дата выхода</string>
+    <string name="detail">Подробнее</string>
+    <string name="Видео">Видео</string>
+    <string name="screenshots">Кадры</string>
 
 </resources>

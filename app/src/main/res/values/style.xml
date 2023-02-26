@@ -72,7 +72,7 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:gravity">center</item>
     </style>
-    
+
     <style name="ShapeAppearanceOverlayExtended" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>

@@ -10,9 +10,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.domain.entity.AnimeDetail
+import com.taiyoapp.taiyo.anime.presentation.adapter.InfoSection
+import com.taiyoapp.taiyo.anime.presentation.adapter.VideoAdapter
+import com.taiyoapp.taiyo.anime.presentation.util.HorizontalItemDecoration
 import com.taiyoapp.taiyo.anime.presentation.util.indentedText
 import com.taiyoapp.taiyo.anime.presentation.viewmodel.DetailViewModel
 import com.taiyoapp.taiyo.databinding.FragmentDetailBinding
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter
 
 
 class DetailFragment : Fragment() {
@@ -62,6 +66,19 @@ class DetailFragment : Fragment() {
         viewModel.animeDetail.observe(viewLifecycleOwner) {
             setAnimeDetail(it)
         }
+        viewModel.videoList.observe(viewLifecycleOwner) {
+            val videoAdapter = VideoAdapter(requireContext())
+            videoAdapter.submitList(viewModel.getVideoKinds(it))
+            with (binding) {
+                rrVideos.adapter = videoAdapter
+                if (rrVideos.itemDecorationCount == 0) {
+                    rrVideos.addItemDecoration(
+                        HorizontalItemDecoration(16, 32)
+                    )
+                }
+            }
+
+        }
     }
 
     private fun setPoster(poster: String) {
@@ -86,6 +103,19 @@ class DetailFragment : Fragment() {
             } else {
                 llScore.visibility = View.GONE
             }
+            val sectionedAdapter = SectionedRecyclerViewAdapter()
+            val infoMap = viewModel.getInfoMapFromDetail(animeDetail)
+            for (info in infoMap) {
+                sectionedAdapter.addSection(
+                    InfoSection(info.key, info.value)
+                )
+            }
+            rrInfo.adapter = sectionedAdapter
+            if (rrInfo.itemDecorationCount == 0) {
+                rrInfo.addItemDecoration(
+                    HorizontalItemDecoration(16, 40)
+                )
+            }
             bWatch.setOnClickListener {
                 val watchFragment = WatchFragment.newInstance(animeId)
                 requireActivity().supportFragmentManager.beginTransaction()
@@ -105,20 +135,10 @@ class DetailFragment : Fragment() {
             } else {
                 timer.timeContainer.visibility = View.GONE
             }
-            with(info) {
-                status.text = animeDetail.status
-                episodes.text = requireContext().getString(
-                    R.string.episodes,
-                    animeDetail.episodesAired,
-                    animeDetail.episodesTotal
-                )
-                kind.text = animeDetail.kind
-                duration.text = animeDetail.duration
-                studio.text = animeDetail.studio
-                airedOn.text = viewModel.formatAiredOn(animeDetail.airedOn)
-                val formattedDescription = animeDetail.description
+            if (animeDetail.description != "Описание отсутствует") {
+                llDescription.visibility = View.VISIBLE
                 description.text = indentedText(
-                    formattedDescription,
+                    animeDetail.description,
                     72,
                     0
                 )
@@ -129,6 +149,8 @@ class DetailFragment : Fragment() {
                         description.maxLines = 5
                     }
                 }
+            } else {
+                description.visibility = View.GONE
             }
         }
     }
