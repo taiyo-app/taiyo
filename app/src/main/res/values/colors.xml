@@ -8,9 +8,16 @@
     <color name="white">#FFFFFF</color>
     <color name="orange">#f47520</color>
     <color name="indigo">#213945</color>
-    <color name="verdigris">#2abdbb</color>
 
     <color name="text">@color/black</color>
     <color name="iconColor">#696969</color>
     <color name="loading">@color/orange</color>
+
+    <color name="grey_background">#e0e0e0</color>
+
+    <color name="watching">#67bb6d</color>
+    <color name="completed">#5c6cc3</color>
+    <color name="planToWatch">#b764bc</color>
+    <color name="onHold">#ffc928</color>
+    <color name="dropped">#ef5450</color>
 </resources>

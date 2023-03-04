@@ -9,19 +9,18 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:liftOnScroll="true"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        app:elevation="0dp"
+        android:background="@color/ui_bg">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:contentInsetStart="0dp"
-            app:layout_scrollFlags="scroll|enterAlways">
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
             <include
                 android:id="@+id/search"
-                layout="@layout/item_search"
+                layout="@layout/layout_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -34,8 +33,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="-8dp"
+            app:tabBackground="@color/bg"
             app:tabMode="scrollable"
             app:tabTextColor="@color/text"
+            android:clipToPadding="false"
             app:tabTextAppearance="@style/TabText"
             app:tabIndicator="@drawable/tab_indicator"
             tools:ignore="SpeakableTextPresentCheck">

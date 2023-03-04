@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,14 +30,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/bg"
+                    android:background="@color/ui_bg"
                     android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/ib_back"
                         android:layout_width="56dp"
                         android:layout_height="56dp"
-                        android:background="@color/bg"
+                        android:layout_marginStart="8dp"
+                        android:background="@color/ui_bg"
                         app:srcCompat="@drawable/ic_back_24"
                         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
@@ -45,7 +47,7 @@
                         android:layout_width="0dp"
                         android:layout_height="56dp"
                         android:layout_weight="1"
-                        android:paddingStart="22dp"
+                        android:paddingStart="16dp"
                         android:paddingEnd="0dp"
                         android:textSize="16sp"
                         android:alpha="0.6"
@@ -65,7 +67,8 @@
                         android:id="@+id/ib_clear"
                         android:layout_width="56dp"
                         android:layout_height="56dp"
-                        android:background="@color/bg"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/ui_bg"
                         android:visibility="gone"
                         app:srcCompat="@drawable/ic_close_24"
                         android:focusable="true"
@@ -87,6 +90,7 @@
                 android:id="@+id/rv_anime"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/bg"
                 android:paddingHorizontal="6dp"
                 android:clipToPadding="false"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

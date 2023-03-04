@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg">#000000</color>
+    <color name="bg">#121212</color>
     <color name="alter_bg">@color/white</color>
     <color name="ui_bg">#24252a</color>
 
     <color name="text">@color/white</color>
     <color name="iconColor">@color/white</color>
     <color name="loading">#e0e0e0</color>
+
+    <color name="grey_background">@color/ui_bg</color>
+
+    <color name="watching">#639c67</color>
+    <color name="completed">#5d68a0</color>
+    <color name="planToWatch">#9e68a2</color>
+    <color name="onHold">#cd922e</color>
+    <color name="dropped">#b24443</color>
 </resources>

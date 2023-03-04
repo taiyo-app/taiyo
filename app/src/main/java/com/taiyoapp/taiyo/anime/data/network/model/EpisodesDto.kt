@@ -3,42 +3,48 @@ package com.taiyoapp.taiyo.anime.data.network.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class EpisodeListDto(
+data class EpisodesDto(
     @SerializedName("results")
     @Expose
-    val results: List<ResultDto>
+    val results: List<ResultDto>,
 ) {
     data class ResultDto(
         @SerializedName("translation")
         @Expose
         val translation: TranslationDto,
+        @SerializedName("episodes_count")
+        @Expose
+        val episodesCount: Int,
         @SerializedName("seasons")
         @Expose
-        val seasons: Map<Int, SeasonDto>
+        val seasons: Map<Int, SeasonDto>,
     )
+
     data class TranslationDto(
         @SerializedName("id")
         @Expose
-        val  id: Int,
+        val id: Int,
         @SerializedName("title")
         @Expose
         val title: String,
         @SerializedName("type")
         @Expose
-        val type: String
+        val type: String,
     )
+
     data class SeasonDto(
         @SerializedName("episodes")
         @Expose
-        val episodes: Map<Int, EpisodeDto>
+        val episodes: Map<Int, EpisodeDto>,
     )
+
     data class EpisodeDto(
         @SerializedName("link")
         @Expose
         val link: String,
         @SerializedName("screenshots")
         @Expose
-        val screenshots: List<String>
+        val screenshots: List<String>,
     )
 }
 

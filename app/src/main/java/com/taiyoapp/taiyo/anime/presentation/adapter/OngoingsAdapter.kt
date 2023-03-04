@@ -1,6 +1,7 @@
 package com.taiyoapp.taiyo.anime.presentation.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -29,14 +30,15 @@ class OngoingsAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val anime = getItem(position)
         anime?.let {
-            with ((holder as OngoingsViewHolder).binding) {
+            with((holder as OngoingsViewHolder).binding) {
                 with(it) {
+                    Log.d("Total", episodesTotal)
                     Glide.with(context)
                         .load(it.image)
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(sivPoster)
                     tvTitle.text = it.title
-                    tvEpisodesAired.text = it.episodesAired.toString()
+                    tvEpisodesAired.text = it.episodesAired
                     tvEpisodesTotal.text = context.getString(
                         R.string.ongoings_episodes,
                         episodesTotal

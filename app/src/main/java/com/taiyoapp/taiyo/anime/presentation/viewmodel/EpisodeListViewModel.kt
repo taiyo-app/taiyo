@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.taiyoapp.taiyo.anime.data.repository.AnimeRepositoryImpl
-import com.taiyoapp.taiyo.anime.domain.entity.EpisodeList.*
-import com.taiyoapp.taiyo.anime.domain.usecase.GetEpisodeListUseCase
+import com.taiyoapp.taiyo.anime.domain.entity.Episodes.*
+import com.taiyoapp.taiyo.anime.domain.usecase.GetEpisodesUseCase
 import kotlinx.coroutines.launch
 
 class EpisodeListViewModel : ViewModel() {
     private val repository = AnimeRepositoryImpl()
 
-    private val getEpisodeListUseCase = GetEpisodeListUseCase(repository)
+    private val getEpisodesUseCase = GetEpisodesUseCase(repository)
 
     private val _episodeList = MutableLiveData<List<Result>>()
 
@@ -26,7 +26,7 @@ class EpisodeListViewModel : ViewModel() {
 
     fun loadTranslations(animeId: Int) {
         viewModelScope.launch {
-            _episodeList.value = getEpisodeListUseCase(animeId)!!
+            _episodeList.value = getEpisodesUseCase(animeId)!!
             val translationList = arrayListOf<Translation>()
             for (result in _episodeList.value!!) {
                 translationList.add(result.translation)

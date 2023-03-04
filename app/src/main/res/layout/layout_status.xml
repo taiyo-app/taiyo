@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_status"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/layout_padding_top"
+    android:background="@drawable/layout_detail_background"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/in_peoples_lists"
+        style="@style/LayoutHeader" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_horizontal_bar_labels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/mcv_horizontal_bar_chart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/grey_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:id="@+id/horizontal_bar_chart"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"/>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mb_watching"
+            style="@style/StatusMaterialButton"
+            android:backgroundTint="@color/watching"
+            app:layout_constraintTop_toBottomOf="@id/mcv_horizontal_bar_chart"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tv_watching_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tv_margin_start"
+            android:text="@string/watching"
+            style="@style/TextLabel"
+            app:layout_constraintTop_toTopOf="@id/mb_watching"
+            app:layout_constraintStart_toEndOf="@id/mb_watching"
+            app:layout_constraintBottom_toBottomOf="@id/mb_watching" />
+
+        <TextView
+            android:id="@+id/tv_watching"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tv_margin_start"
+            style="@style/TextValue"
+            android:fontFamily="@font/roboto_medium"
+            app:layout_constraintTop_toTopOf="@id/mb_watching"
+            app:layout_constraintStart_toEndOf="@id/tv_watching_label"
+            app:layout_constraintBottom_toBottomOf="@id/mb_watching"
+            tools:text="67456" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mb_plan_to_watch"
+            style="@style/StatusMaterialButton"
+            android:backgroundTint="@color/planToWatch"
+            app:layout_constraintTop_toBottomOf="@id/mb_watching"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tv_plan_to_watch_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tv_margin_start"
+            android:text="@string/plan_to_watch"
+            style="@style/TextLabel"
+            app:layout_constraintTop_toTopOf="@id/mb_plan_to_watch"
+            app:layout_constraintStart_toEndOf="@id/mb_plan_to_watch"
+            app:layout_constraintBottom_toBottomOf="@id/mb_plan_to_watch" />
+
+        <TextView
+            android:id="@+id/tv_plan_to_watch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tv_margin_start"
+            style="@style/TextValue"
+            android:fontFamily="@font/roboto_medium"
+            app:layout_constraintTop_toTopOf="@id/mb_plan_to_watch"
+            app:layout_constraintStart_toEndOf="@id/tv_plan_to_watch_label"
+            app:layout_constraintBottom_toBottomOf="@id/mb_plan_to_watch"
+            tools:text="67456" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mb_completed"
+            style="@style/StatusMaterialButton"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/completed"
+            app:layout_constraintTop_toBottomOf="@id/mb_plan_to_watch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tv_completed_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tv_margin_start"
+            android:text="@string/completed"
+            style="@style/TextLabel"
+            app:layout_constraintTop_toTopOf="@id/mb_completed"
+            app:layout_constraintStart_toEndOf="@id/mb_completed"
+            app:layout_constraintBottom_toBottomOf="@id/mb_completed" />
+
+        <TextView
+            android:id="@+id/tv_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            style="@style/TextValue"
+            android:fontFamily="@font/roboto_medium"
+            app:layout_constraintTop_toTopOf="@id/mb_completed"
+            app:layout_constraintStart_toEndOf="@id/tv_completed_label"
+            app:layout_constraintBottom_toBottomOf="@id/mb_completed"
+            tools:text="67456" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mb_on_hold"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="164dp"
+            style="@style/StatusMaterialButton"
+            android:backgroundTint="@color/onHold"
+            app:layout_constraintTop_toBottomOf="@id/mcv_horizontal_bar_chart"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tv_on_hold_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tv_margin_start"
+            android:text="@string/on_hold"
+            style="@style/TextLabel"
+            app:layout_constraintTop_toTopOf="@id/mb_on_hold"
+            app:layout_constraintStart_toEndOf="@id/mb_on_hold"
+            app:layout_constraintBottom_toBottomOf="@id/mb_on_hold" />
+
+        <TextView
+            android:id="@+id/tv_on_hold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            style="@style/TextValue"
+            android:fontFamily="@font/roboto_medium"
+            app:layout_constraintTop_toTopOf="@id/mb_on_hold"
+            app:layout_constraintStart_toEndOf="@id/tv_on_hold_label"
+            app:layout_constraintBottom_toBottomOf="@id/mb_on_hold"
+            tools:text="67456" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mb_dropped"
+            android:layout_marginTop="0dp"
+            style="@style/StatusMaterialButton"
+            android:backgroundTint="@color/dropped"
+            app:layout_constraintTop_toTopOf="@id/mb_plan_to_watch"
+            app:layout_constraintStart_toStartOf="@+id/mb_on_hold"
+            app:layout_constraintBottom_toBottomOf="@id/mb_plan_to_watch"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tv_dropped_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/tv_margin_start"
+            android:text="@string/dropped"
+            style="@style/TextLabel"
+            app:layout_constraintTop_toTopOf="@id/mb_dropped"
+            app:layout_constraintStart_toEndOf="@id/mb_dropped"
+            app:layout_constraintBottom_toBottomOf="@id/mb_dropped" />
+
+        <TextView
+            android:id="@+id/tv_dropped"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            style="@style/TextValue"
+            android:fontFamily="@font/roboto_medium"
+            app:layout_constraintTop_toTopOf="@id/mb_dropped"
+            app:layout_constraintStart_toEndOf="@id/tv_dropped_label"
+            app:layout_constraintBottom_toBottomOf="@id/mb_dropped"
+            tools:text="67456" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

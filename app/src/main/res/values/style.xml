@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     // Anime
-    <style name="roundedImageView" parent="">
+    <style name="CardViewShapeableImageView" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">16dp</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    <style name="CardViewTitle" parent="">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginStart">1dp</item>
+        <item name="android:layout_marginEnd">1dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:alpha">0.9</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <style name="CardViewDescription" parent="">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginStart">1dp</item>
+        <item name="android:layout_marginEnd">1dp</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:alpha">0.6</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
     </style>
     // TabLayout
     <style name="TabText" parent="TextAppearance.Design.Tab">
@@ -49,36 +71,59 @@
         <item name="cornerSize">25%</item>
     </style>
 
-    // Anime Info
-    <style name="info_label">
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:alpha">0.7</item>
-    </style>
-    <style name="info_value">
-        <item name="android:textSize">14sp</item>
+    <style name="LayoutHeader">
+        <item name="android:textSize">@dimen/h2_text_size</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:alpha">0.9</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="TextLabel">
+        <item name="android:textSize">@dimen/b_text_size</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:gravity">center</item>
+        <item name="android:alpha">0.7</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+    <style name="TextValue" parent="TextLabel">
+        <item name="android:alpha">0.9</item>
     </style>
 
-    // Anime Timer
-    <style name="timer_label">
-        <item name="android:textSize">14sp</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:alpha">0.7</item>
-        <item name="android:gravity">center</item>
-    </style>
-    <style name="timer_value">
-        <item name="android:textSize">16sp</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:gravity">center</item>
+    <style name="TextLabelAlpha" parent="TextLabel">
+        <item name="android:alpha">0.5</item>
     </style>
 
     <style name="ShapeAppearanceOverlayExtended" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
     </style>
-    <style name="customRatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/orange</item>
-        <item name="colorControlActivated">@color/orange</item>
+    <style name="ToggleButtonWithIcon" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="iconPadding">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="android:minWidth">56dp</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="rippleColor">@android:color/transparent</item>
+    </style>
+    <style name="layout_detail_item">
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:background">@drawable/layout_detail_background</item>
+    </style>
+    <style name="StatusMaterialButton">
+        <item name="android:layout_width">16dp</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="cornerRadius">4dp</item>
+        <item name="rippleColor">@null</item>
     </style>
 </resources>

@@ -3,38 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:elevation="4dp"
-    android:padding="24dp"
-    app:cardCornerRadius="16dp"
+    android:layout_marginBottom="-16dp"
+    android:backgroundTint="@color/bg"
+    app:cardCornerRadius="0dp"
     app:cardElevation="0dp"
-    tools:layout_margin="4dp"
-    android:backgroundTint="@color/ui_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:background="@color/bg"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_info_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_gravity="center"
-            style="@style/info_value"
-            tools:text="Онгоинг" />
+            android:fontFamily="@font/roboto_medium"
+            style="@style/TextValue"
+            tools:text="@string/ongoings" />
 
         <TextView
             android:id="@+id/tv_info_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
+            android:layout_marginTop="2dp"
             android:layout_gravity="center"
-            android:textSize="12sp"
-            style="@style/info_label"
-            tools:text="Статус" />
+            style="@style/TextLabel"
+            tools:text="@string/status" />
 
     </LinearLayout>
 

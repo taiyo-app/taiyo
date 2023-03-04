@@ -3,40 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg">
+    android:layout_height="match_parent">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/b_watch"
+        android:id="@+id/fab_watch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         app:backgroundTint="@color/orange"
-        app:srcCompat="@drawable/ic_play_24"
         app:borderWidth="0dp"
-        app:tint="@color/white"
         app:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+        app:srcCompat="@drawable/ic_play_24"
+        app:tint="@color/white"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/b_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        app:borderWidth="0dp"
-        app:elevation="2dp"
+        android:layout_marginStart="12dp"
         app:fabCustomSize="42dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayExtended"
-        style="style/ShapeAppearanceOverlayExtended"
         app:backgroundTint="@color/ui_bg"
         app:srcCompat="@drawable/ic_back_24"
         app:tint="@color/iconColor"
+        style="style/ShapeAppearanceOverlayExtended"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayExtended"
+        app:borderWidth="0dp"
+        app:elevation="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
     <ScrollView
@@ -51,14 +50,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/bg">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/gl_poster"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="380dp" />
+                app:layout_constraintGuide_begin="372dp" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -80,16 +80,15 @@
                 <ImageView
                     android:id="@+id/gradient_top"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="@dimen/gradient_height"
                     android:layout_gravity="top"
                     android:background="@drawable/gradient_top_background"
-                    app:layout_collapseParallaxMultiplier="0"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
 
                 <ImageView
                     android:id="@+id/gradient_bottom"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="@dimen/gradient_height"
                     android:layout_gravity="bottom"
                     android:background="@drawable/gradient_bottom_background"
                     tools:ignore="ContentDescription,ImageContrastCheck" />
@@ -97,12 +96,12 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:cardCornerRadius="16dp"
+                    android:layout_marginTop="@dimen/layout_margin_top"
+                    android:layout_marginHorizontal="78dp"
+                    android:layout_marginBottom="@dimen/layout_margin_bottom"
                     android:layout_gravity="center"
-                    app:cardElevation="8dp"
-                    android:layout_marginHorizontal="72dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="16dp">
+                    app:cardCornerRadius="@dimen/main_radius"
+                    app:cardElevation="8dp">
 
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/poster"
@@ -117,12 +116,51 @@
             </FrameLayout>
 
             <LinearLayout
+                android:id="@+id/ll_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="-4dp"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/gl_poster"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:visibility="visible" >
+
+                <RatingBar
+                    android:id="@+id/rb_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="0.1"
+                    android:scaleX="1.25"
+                    android:scaleY="1.25"
+                    android:secondaryProgressTint="@color/orange"
+                    android:progressTint="@color/orange"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:rating="5"
+                    tools:rating="4.5" />
+
+                <TextView
+                    android:id="@+id/tv_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    style="@style/TextLabel"
+                    android:includeFontPadding="false"
+                    tools:text="4.6" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/ll_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="32dp"
-                app:layout_constraintTop_toBottomOf="@id/gl_poster"
+                app:layout_constraintTop_toBottomOf="@id/ll_score"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
@@ -130,26 +168,27 @@
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textColor="@color/text"
                     android:gravity="center"
+                    android:textSize="20sp"
+                    android:textColor="@color/text"
+                    android:fontFamily="@font/roboto_bold"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:fontFamily="@font/roboto_bold"
+                    android:alpha="0.9"
                     tools:text="@string/get_recommendations"
-                    app:layout_constraintTop_toBottomOf="@+id/gl_poster"
+                    app:layout_constraintTop_toBottomOf="@+id/ll_score"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
                     android:id="@+id/title_eng"
-                    style="@style/info_label"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    style="@style/TextLabelAlpha"
                     android:gravity="center"
-                    android:ellipsize="end"
                     android:maxLines="1"
+                    android:ellipsize="end"
                     app:layout_constraintTop_toBottomOf="@+id/title"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -158,185 +197,87 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:visibility="gone"
+                android:layout_marginBottom="@dimen/layout_margin_bottom"
+                android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/ll_title"
-                app:layout_constraintStart_toStartOf="@id/ll_title"
-                app:layout_constraintEnd_toEndOf="@id/ll_title"
-                tools:visibility="visible" >
-
-                <RatingBar
-                    android:id="@+id/rb_score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:stepSize="0.5"
-                    android:scaleX="1.25"
-                    android:scaleY="1.25"
-                    android:theme="@style/customRatingBar"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    android:rating="5"
-                    tools:rating="4.5" />
-
-                <TextView
-                    android:id="@+id/score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/roboto_medium"
-                    tools:text="8.4" />
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rr_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:clipToPadding="false"
-                android:paddingBottom="4dp"
-                android:orientation="horizontal"
-                android:overScrollMode="never"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_info"
-                tools:padding="4dp"
-                app:layout_constraintTop_toBottomOf="@id/ll_score"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <include
-                android:id="@+id/timer"
-                layout="@layout/item_timer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@id/rr_info"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/ll_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="16dp"
-                android:orientation="vertical"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/timer"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:visibility="visible">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/description"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_medium"/>
-
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:maxLines="5"
-                    android:lineSpacingExtra="6dp"
-                    android:ellipsize="end"
-                    android:text="@string/place_holder_symbol"
-                    style="@style/info_label" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/detail"
-                    android:textColor="@color/orange"
-                    android:gravity="center"
-                    style="@style/info_value" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_trailer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@id/ll_description">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:text="@string/Видео"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_medium"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rr_videos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    android:overScrollMode="never"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_video"
-                    tools:padding="4dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_screenshots"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginVertical="16dp"
-                android:layout_marginHorizontal="16dp"
-                app:layout_constraintTop_toBottomOf="@id/ll_trailer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/screenshots"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/roboto_medium"/>
-
-                <FrameLayout
+                <include
+                    android:id="@+id/layout_info"
+                    layout="@layout/layout_info"
+                    style="@style/layout_detail_item"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="2dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_gravity="center"
-                    android:clipToPadding="false">
+                    android:layout_height="wrap_content" />
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="316dp"
-                        android:layout_height="172dp"
-                        app:cardCornerRadius="16dp"
-                        android:layout_gravity="center"
-                        app:cardElevation="0dp">
+                <include
+                    android:id="@+id/layout_timer"
+                    layout="@layout/layout_timer"
+                    style="@style/layout_detail_item"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="2dp"
+                    android:layout_height="wrap_content" />
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/siv_poster"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            tools:ignore="ContentDescription,ImageContrastCheck"
-                            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                <include
+                    android:id="@+id/layout_description"
+                    layout="@layout/layout_description"
+                    style="@style/layout_detail_item"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_height="wrap_content" />
 
-                    </androidx.cardview.widget.CardView>
+                <include
+                    android:id="@+id/layout_video_kinds"
+                    layout="@layout/layout_video_kinds"
+                    style="@style/layout_detail_item"
+                    android:layout_marginTop="@dimen/layout_margin_top"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="-3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-                </FrameLayout>
+                <include
+                    android:id="@+id/layout_rating"
+                    layout="@layout/layout_rating"
+                    style="@style/layout_detail_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/layout_status"
+                    layout="@layout/layout_status"
+                    style="@style/layout_detail_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/layout_screenshots"
+                    layout="@layout/layout_screenshots"
+                    style="@style/layout_detail_item"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="-3dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <include
+                    android:id="@+id/layout_similar"
+                    layout="@layout/layout_similar"
+                    style="@style/layout_detail_item"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

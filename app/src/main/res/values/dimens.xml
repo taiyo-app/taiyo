@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="h1_text_size">48sp</dimen>
+    <dimen name="h2_text_size">18sp</dimen>
+    <dimen name="b_text_size">14sp</dimen>
+
+    <dimen name="layout_margin_top">16dp</dimen>
+    <dimen name="layout_margin_start">16dp</dimen>
+    <dimen name="layout_margin_end">16dp</dimen>
+    <dimen name="layout_margin_bottom">16dp</dimen>
+
+    <dimen name="tv_margin_top">8dp</dimen>
+    <dimen name="tv_margin_start">8dp</dimen>
+    <dimen name="tv_margin_end">8dp</dimen>
+    <dimen name="tv_margin_bottom">8dp</dimen>
+
+    <dimen name="layout_padding_top">16dp</dimen>
+    <dimen name="layout_padding_start">16dp</dimen>
+    <dimen name="layout_padding_end">16dp</dimen>
+    <dimen name="layout_padding_bottom">16dp</dimen>
+
+    <dimen name="gradient_height">100dp</dimen>
+
+    <dimen name="main_radius">16dp</dimen>
+
+    <dimen name="cl_rating_margin_top">4dp</dimen>
+
+    <dimen name="num_rating_margin_start">8dp</dimen>
+    <dimen name="num_rating_margin_end">8dp</dimen>
+</resources>

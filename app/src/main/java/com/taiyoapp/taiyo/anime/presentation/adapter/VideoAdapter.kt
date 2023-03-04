@@ -13,6 +13,7 @@ import com.taiyoapp.taiyo.databinding.ItemVideoBinding
 class VideoAdapter(
     private val context: Context,
 ) : ListAdapter<Video, VideoViewHolder>(VideoDiffCallback) {
+    var onVideoClick: ((Video) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
         val binding = ItemVideoBinding.inflate(
@@ -24,13 +25,14 @@ class VideoAdapter(
     }
 
     override fun onBindViewHolder(holder: VideoViewHolder, position: Int) {
-        val video = getItem(position)
+        val videoItem = getItem(position)
         with (holder.binding) {
             Glide.with(context)
-                .load(video.imageUrl)
+                .load(videoItem.imageUrl)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(sivVideo)
-            tvKind.text = video.kind
+            tvVideoName.text = videoItem.name
+            root.setOnClickListener { onVideoClick?.invoke(videoItem) }
         }
     }
 }

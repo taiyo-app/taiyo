@@ -6,11 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.taiyoapp.taiyo.anime.data.repository.AnimeRepositoryImpl
-import com.taiyoapp.taiyo.anime.domain.entity.AnimeDetail
-import com.taiyoapp.taiyo.anime.domain.entity.Video
-import com.taiyoapp.taiyo.anime.domain.usecase.GetAnimeDetailUseCase
-import com.taiyoapp.taiyo.anime.domain.usecase.GetPosterUseCase
-import com.taiyoapp.taiyo.anime.domain.usecase.GetVideoUseCase
+import com.taiyoapp.taiyo.anime.domain.entity.*
+import com.taiyoapp.taiyo.anime.domain.usecase.*
 import com.taiyoapp.taiyo.anime.presentation.util.DateFormatter
 import kotlinx.coroutines.launch
 
@@ -18,46 +15,64 @@ import kotlinx.coroutines.launch
 class DetailViewModel : ViewModel() {
     private val repository = AnimeRepositoryImpl()
 
-    private val getPosterUseCase = GetPosterUseCase(repository)
-    private val getAnimeDetailUseCase = GetAnimeDetailUseCase(repository)
+    private val getDetailMalUseCase = GetDetailMalUseCase(repository)
+    private val getDetailShikiUseCase = GetDetailShikiUseCase(repository)
     private val getVideoUseCase = GetVideoUseCase(repository)
+    private val getScreenshotsUseCase = GetScreenshotsUseCase(repository)
+    private val getSimilarUseCase = GetSimilarUseCase(repository)
 
-    private var _poster = MutableLiveData<String>()
-    val poster: LiveData<String>
-        get() = _poster
+    private var _detailMal = MutableLiveData<DetailMal>()
+    val detailMAL: LiveData<DetailMal>
+        get() = _detailMal
 
-    private var _animeDetail = MutableLiveData<AnimeDetail>()
-    val animeDetail: LiveData<AnimeDetail>
-        get() = _animeDetail
+    private var _DetailShiki = MutableLiveData<DetailShiki>()
+    val detailShiki: LiveData<DetailShiki>
+        get() = _DetailShiki
 
-    private var _videoList = MutableLiveData<List<Video>>()
-    val videoList: LiveData<List<Video>>
-        get() = _videoList
+    private var _video = MutableLiveData<List<Video>>()
+    val video: LiveData<List<Video>>
+        get() = _video
 
     private var _videoKind = MutableLiveData<List<Video>>()
     val videoKind: LiveData<List<Video>>
         get() = _videoKind
 
+    private var _screenshots = MutableLiveData<List<Screenshot>>()
+    val screenshots: LiveData<List<Screenshot>>
+        get() = _screenshots
+
+    private var _similar = MutableLiveData<List<Anime>>()
+    val similar: LiveData<List<Anime>>
+        get() = _similar
+
     private var timer: CountDownTimer? = null
 
-    fun loadPoster(id: Int) {
+    fun loadDetailMal(id: Int) {
         viewModelScope.launch {
-            getPosterUseCase(id)
+            getDetailMalUseCase(id)
                 .collect {
-                    _poster.postValue(it)
+                    _detailMal.postValue(it)
                 }
         }
     }
 
-    fun loadAnimeDetail(id: Int) {
+    fun loadDetailShiki(id: Int) {
         viewModelScope.launch {
-            getAnimeDetailUseCase(id)
+            getDetailShikiUseCase(id)
                 .collect {
-                    _animeDetail.postValue(it)
+                    _DetailShiki.postValue(it)
                 }
             getVideoUseCase(id)
                 .collect {
-                    _videoList.value = it
+                    _video.value = it
+                }
+            getScreenshotsUseCase(id)
+                .collect {
+                    _screenshots.value = it
+                }
+            getSimilarUseCase(id)
+                .collect {
+                    _similar.value = it
                 }
         }
     }
@@ -71,37 +86,48 @@ class DetailViewModel : ViewModel() {
         }
     }
 
-    fun getInfoMapFromDetail(animeDetail: AnimeDetail): Map<String, String> {
+    fun getInfoMapFromDetail(detailShiki: DetailShiki): Map<String, String> {
+        val episodesNumber = if (detailShiki.episodesAired == detailShiki.episodesTotal) {
+            detailShiki.episodesTotal
+        } else {
+            detailShiki.episodesAired + " из " + detailShiki.episodesTotal
+        }
         return mapOf(
-            "Статус" to animeDetail.status,
-            "Эпизоды" to animeDetail.episodesAired + " из " + animeDetail.episodesTotal,
-            "Дата выхода" to formatAiredOn(animeDetail.airedOn),
-            "Формат" to animeDetail.kind,
-            "Длительность" to animeDetail.duration,
-            "Студия" to animeDetail.studio
+            "Статус" to detailShiki.status,
+            "Эпизоды" to episodesNumber,
+            "Дата выхода" to formatAiredOn(detailShiki.airedOn),
+            "Формат" to detailShiki.kind,
+            "Длительность" to detailShiki.duration,
+            "Студия" to detailShiki.studio
         )
     }
 
-    fun getVideoKinds(videoList: List<Video>): List<Video> {
-        val kindList = videoList
+    fun getVideoKinds(video: List<Video>): List<Video> {
+        val videoByKinds = video
             .distinctBy { it.kind }
-        val formattedKindList = mutableListOf<Video>()
-        for (video in kindList) {
-            val formattedkind = when (video.kind) {
-                "pv" -> "Трейлеры"
-                "character_trailer" -> "Персонажи"
-                "episode_preview" -> "Превью"
-                "op" -> "Опенинги"
-                "ed" -> "Эндинги"
-                "clip" -> "Клипы"
-                "op_ed_clip" -> "Муз. клипы"
-                else -> "Другое"
-            }
-            formattedKindList.add(video.copy(kind = formattedkind))
-        }
-        return formattedKindList
+        return videoByKinds
     }
 
+    fun getVideoByKind(kind: String): List<Video> {
+        val video = _video.value!!.filter {
+            it.kind == kind
+        }
+        return video
+    }
+
+    fun getStatusStatsForCharts(status: DetailMal.Statistics.Status): List<Float> {
+        val amount = with(status) {
+            (watching.toFloat() + completed.toFloat() + planToWatch.toFloat()
+                    + onHold.toFloat() + dropped.toFloat())
+        }
+        val watching = status.watching.toFloat()
+        val playToWatch = status.planToWatch.toFloat()
+        val completed = status.completed.toFloat()
+        val onHold = status.onHold.toFloat()
+        val dropped = status.dropped.toFloat()
+        return listOf(watching, playToWatch, completed, onHold, dropped, amount)
+
+    }
 
     override fun onCleared() {
         super.onCleared()

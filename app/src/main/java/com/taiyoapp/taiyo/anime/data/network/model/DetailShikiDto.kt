@@ -37,6 +37,9 @@ data class DetailShikiDto(
     @SerializedName("description")
     @Expose
     val description: String?,
+    @SerializedName("rates_scores_stats")
+    @Expose
+    val ratesScoresStats: List<RatesScoresStatsDto>?,
     @SerializedName("next_episode_at")
     @Expose
     val nextEpisodeAt: String?,
@@ -45,16 +48,26 @@ data class DetailShikiDto(
     val genres: List<GenreDto>?,
     @SerializedName("studios")
     @Expose
-    val studios: List<StudioDto>?
+    val studios: List<StudioDto>?,
 ) {
+    data class RatesScoresStatsDto(
+        @SerializedName("name")
+        @Expose
+        val name: String?,
+        @SerializedName("value")
+        @Expose
+        val value: Int?,
+    )
+
     data class GenreDto(
         @SerializedName("russian")
         @Expose
-        val russian: String?
+        val russian: String?,
     )
+
     data class StudioDto(
         @SerializedName("name")
         @Expose
-        val name: String?
+        val name: String?,
     )
 }

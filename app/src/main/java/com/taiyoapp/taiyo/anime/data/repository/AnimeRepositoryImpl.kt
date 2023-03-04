@@ -5,21 +5,19 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.taiyoapp.taiyo.anime.data.mapper.AnimeMapper
 import com.taiyoapp.taiyo.anime.data.network.kodik.ApiFactoryKodik
-import com.taiyoapp.taiyo.anime.data.network.myanimelist.ApiFactoryMAL
+import com.taiyoapp.taiyo.anime.data.network.myanimelist.ApiFactoryMal
 import com.taiyoapp.taiyo.anime.data.network.shikimori.AnimePageLoader
 import com.taiyoapp.taiyo.anime.data.network.shikimori.AnimePagingSource
 import com.taiyoapp.taiyo.anime.data.network.shikimori.ApiFactoryShiki
-import com.taiyoapp.taiyo.anime.domain.entity.Anime
-import com.taiyoapp.taiyo.anime.domain.entity.AnimeDetail
-import com.taiyoapp.taiyo.anime.domain.entity.EpisodeList.Result
-import com.taiyoapp.taiyo.anime.domain.entity.Video
+import com.taiyoapp.taiyo.anime.domain.entity.*
+import com.taiyoapp.taiyo.anime.domain.entity.Episodes.Result
 import com.taiyoapp.taiyo.anime.domain.repository.AnimeRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class AnimeRepositoryImpl : AnimeRepository {
     private val apiServiceShiki = ApiFactoryShiki.apiServiceShiki
-    private val apiServiceMAL = ApiFactoryMAL.apiServiceMAL
+    private val apiServiceMal = ApiFactoryMal.apiServiceMAL
     private val apiServiceKodik = ApiFactoryKodik.apiServiceKodik
     private val mapper = AnimeMapper()
 
@@ -44,11 +42,24 @@ class AnimeRepositoryImpl : AnimeRepository {
         ).flow
     }
 
-    override suspend fun getPoster(id: Int): Flow<String> = flow {
-        val poster = mapper.mapPosterDtoToEntity(
-            apiServiceMAL.getPoster(id)
+    override suspend fun getEpisodes(id: Int): List<Result> {
+        return mapper.mapEpisodeListDtoToEntity(
+            apiServiceKodik.getEpisodes(SEARCH_URL, id)
+        ).results
+    }
+
+    override suspend fun getDetailMal(id: Int): Flow<DetailMal> = flow {
+        val detailMAL = mapper.mapDetailMalDtoToEntity(
+            apiServiceMal.getDetailMal(id)
         )
-        emit(poster)
+        emit(detailMAL)
+    }
+
+    override suspend fun getDetailShiki(id: Int): Flow<DetailShiki> = flow {
+        val animeDetail = mapper.mapDetailShikiDtoToEntity(
+            apiServiceShiki.getAnimeDetail(id)
+        )
+        emit(animeDetail)
     }
 
     override suspend fun getVideo(id: Int): Flow<List<Video>> = flow {
@@ -58,17 +69,18 @@ class AnimeRepositoryImpl : AnimeRepository {
         emit(videoList.toList())
     }
 
-    override suspend fun getAnimeDetail(id: Int): Flow<AnimeDetail> = flow {
-        val animeDetail = mapper.mapAnimeDetailDtoToEntity(
-            apiServiceShiki.getAnimeDetail(id)
-        )
-        emit(animeDetail)
+    override suspend fun getScreenshots(id: Int): Flow<List<Screenshot>> = flow {
+        val screenshots = mapper.mapJsonArrayScreenshotsDtoToEntity(
+            apiServiceShiki.getScreenshots(id)
+        ).take(8)
+        emit(screenshots.toList())
     }
 
-    override suspend fun getEpisodeList(id: Int): List<Result> {
-        return mapper.mapEpisodeListDtoToEntity(
-            apiServiceKodik.getEpisodesList(SEARCH_URL, id)
-        ).results
+    override suspend fun getSimilar(id: Int): Flow<List<Anime>> = flow {
+        val similar = mapper.mapJsonArraySimilarDtoToEntity(
+            apiServiceShiki.getSimilar(id)
+        )
+        emit(similar.toList())
     }
 
     companion object {
