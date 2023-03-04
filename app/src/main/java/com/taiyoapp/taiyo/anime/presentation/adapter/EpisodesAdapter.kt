@@ -7,19 +7,19 @@ import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.taiyoapp.taiyo.R
-import com.taiyoapp.taiyo.anime.domain.entity.EpisodeList.Episode
+import com.taiyoapp.taiyo.anime.domain.entity.Episodes.Episode
 import com.taiyoapp.taiyo.anime.presentation.adapter.viewholder.EpisodeViewHolder
-import com.taiyoapp.taiyo.databinding.ItemEpisodeBinding
+import com.taiyoapp.taiyo.databinding.ItemEpisodeLargeBinding
 
-class EpisodeListAdapter(
+class EpisodesAdapter(
     private val context: Context,
-) : ListAdapter<Episode, EpisodeViewHolder>(EpisodeListDiffCallback) {
+) : ListAdapter<Episode, EpisodeViewHolder>(EpisodesDiffCallback) {
     var onEpisodeClick: ((Episode) -> Unit)? = null
 
     var episodeCounter = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
-        val binding = ItemEpisodeBinding.inflate(
+        val binding = ItemEpisodeLargeBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -29,6 +29,7 @@ class EpisodeListAdapter(
 
     override fun onBindViewHolder(holder: EpisodeViewHolder, position: Int) {
         val episode = getItem(position)
+        val episodeCount = position + 1
         with(holder.binding) {
             with(episode) {
                 Glide.with(context)
@@ -37,7 +38,7 @@ class EpisodeListAdapter(
                     .into(episodeImage)
                 episodeNumber.text = context.getString(
                     R.string.episode_number,
-                    episodeCounter++.toString()
+                    episodeCount.toString()
                 )
             }
             root.setOnClickListener {

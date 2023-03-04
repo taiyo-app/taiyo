@@ -1,20 +1,21 @@
 package com.taiyoapp.taiyo.anime.domain.repository
 
 import androidx.paging.PagingData
-import com.taiyoapp.taiyo.anime.domain.entity.Anime
-import com.taiyoapp.taiyo.anime.domain.entity.AnimeDetail
-import com.taiyoapp.taiyo.anime.domain.entity.EpisodeList
-import com.taiyoapp.taiyo.anime.domain.entity.Video
+import com.taiyoapp.taiyo.anime.domain.entity.*
 import kotlinx.coroutines.flow.Flow
 
 interface AnimeRepository {
     suspend fun getAnimeList(queryMap: HashMap<String, Any>): Flow<PagingData<Anime>>
 
-    suspend fun getAnimeDetail(id: Int): Flow<AnimeDetail>
+    suspend fun getDetailShiki(id: Int): Flow<DetailShiki>
 
-    suspend fun getPoster(id: Int): Flow<String>
+    suspend fun getDetailMal(id: Int): Flow<DetailMal>
 
     suspend fun getVideo(id: Int): Flow<List<Video>>
 
-    suspend fun getEpisodeList(id: Int): List<EpisodeList.Result>
+    suspend fun getScreenshots(id: Int): Flow<List<Screenshot>>
+
+    suspend fun getSimilar(id: Int): Flow<List<Anime>>
+
+    suspend fun getEpisodes(id: Int): List<Episodes.Result>
 }

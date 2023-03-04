@@ -86,7 +86,7 @@ class MoviesFragment : Fragment() {
             rvAnime.adapter = adapterWithLoadState
             rvAnime.layoutManager = layoutManager
             rvAnime.addItemDecoration(
-                VerticalItemDecoration(12, spanCount, layoutManager.orientation)
+                VerticalItemDecoration(12, spanCount)
             )
         }
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {

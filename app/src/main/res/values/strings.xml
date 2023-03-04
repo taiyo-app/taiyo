@@ -31,6 +31,7 @@
     <string name="next_series_number">До выхода %s серии</string>
     <string name="place_holder_symbol">~</string>
     <string name="rating">Рейтинг</string>
+    <string name="ratesScoresStats">%s голосов</string>
     <string name="place_holder_rating">&#160;/&#160;</string>
     <string name="max_rating">10</string>
     <string name="episodes_total">Всего серий</string>
@@ -49,13 +50,41 @@
     <string name="dub">Озвучка</string>
     <string name="episode_number">%s СЕРИЯ</string>
 
-    // Detail NavBar
+    // Info
     <string name="description">Описание</string>
-    <string name="watch">Cмотреть</string>
+    <string name="watch">Смотреть</string>
     <string name="status">Статус</string>
     <string name="aired_on">Дата выхода</string>
-    <string name="detail">Подробнее</string>
-    <string name="Видео">Видео</string>
-    <string name="screenshots">Кадры</string>
 
+    // Description
+    <string name="detail">Подробнее…</string>
+    <string name="hideDetail">Скрыть</string>
+
+    // Layout Headers
+    <string name="video">Видео</string>
+    <string name="screenshots">Кадры</string>
+    <string name="in_peoples_lists">В списках у людей</string>
+    <string name="recommendations">Рекомендации</string>
+
+    // Status
+    <string name="watching">Смотрю</string>
+    <string name="plan_to_watch">В планах</string>
+    <string name="completed">Просмотрено</string>
+    <string name="on_hold">Отложено</string>
+    <string name="dropped">Брошено</string>
+
+    // Rating
+    <string name="num_10">10</string>
+    <string name="num_9">9</string>
+    <string name="num_8">8</string>
+    <string name="num_7">7</string>
+    <string name="num_6">6</string>
+    <string name="num_5">5</string>
+    <string name="num_4">4</string>
+    <string name="num_3">3</string>
+    <string name="num_2">2</string>
+    <string name="num_1">1</string>
+
+    // Episodes Fragment
+    <string name="episode_list">Список серий</string>
 </resources>

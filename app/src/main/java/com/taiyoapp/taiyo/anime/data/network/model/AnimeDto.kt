@@ -12,7 +12,7 @@ data class AnimeDto(
     val russian: String?,
     @SerializedName("image")
     @Expose
-    val animeImageDto: AnimeImageDto?,
+    val imageDto: ImageDto?,
     @SerializedName("status")
     @Expose
     val status: String?,
@@ -26,7 +26,7 @@ data class AnimeDto(
     @Expose
     val airedOn: String?,
 ) {
-    data class AnimeImageDto(
+    data class ImageDto(
         @SerializedName("original")
         @Expose
         val original: String

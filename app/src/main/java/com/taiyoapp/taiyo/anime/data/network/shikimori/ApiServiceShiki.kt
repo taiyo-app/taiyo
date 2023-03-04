@@ -12,17 +12,27 @@ interface ApiServiceShiki {
     @GET("animes")
     suspend fun getAnimeList(
         @Header(HEADER_PARAM_USER_AGENT) appName: String = APPLICATION_NAME,
-        @QueryMap queryMap: HashMap<String, Any>
+        @QueryMap queryMap: HashMap<String, Any>,
     ): List<AnimeDto>
 
     @GET("animes/{id}")
     suspend fun getAnimeDetail(
-        @Path(QUERY_PARAM_ID) id: Int
+        @Path(QUERY_PARAM_ID) id: Int,
     ): DetailShikiDto
 
     @GET("animes/{id}/videos")
     suspend fun getVideo(
-        @Path(QUERY_PARAM_ID) id: Int
+        @Path(QUERY_PARAM_ID) id: Int,
+    ): JsonElement
+
+    @GET("animes/{id}/screenshots")
+    suspend fun getScreenshots(
+        @Path(QUERY_PARAM_ID) id: Int,
+    ): JsonElement
+
+    @GET("animes/{id}/similar")
+    suspend fun getSimilar(
+        @Path(QUERY_PARAM_ID) id: Int,
     ): JsonElement
 
     companion object {

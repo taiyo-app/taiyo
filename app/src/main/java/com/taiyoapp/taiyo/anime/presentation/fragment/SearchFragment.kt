@@ -98,7 +98,7 @@ class SearchFragment : Fragment() {
             rvAnime.layoutManager = layoutManager
             rvAnime.itemAnimator = null
             rvAnime.addItemDecoration(
-                VerticalItemDecoration(12, spanCount, layoutManager.orientation)
+                VerticalItemDecoration(12, spanCount)
             )
         }
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
