@@ -87,4 +87,7 @@
 
     // Episodes Fragment
     <string name="episode_list">Список серий</string>
+    <string name="item_translation">%s  •  %s  эп</string>
+    <string name="item_translation_one_episode">%s </string>
+
 </resources>

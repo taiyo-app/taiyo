@@ -1,8 +1,6 @@
 package com.taiyoapp.taiyo.anime.presentation.fragment
 
-import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,11 +85,6 @@ class ScreenshotsFragment : Fragment() {
         } else {
             throw RuntimeException("Args doesn't contain a key")
         }
-    }
-
-    inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
-        SDK_INT >= 33 -> getParcelable(key, T::class.java)
-        else -> @Suppress("DEPRECATION") getParcelable(key) as? T
     }
 
     companion object {

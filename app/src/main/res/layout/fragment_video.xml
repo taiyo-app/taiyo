@@ -9,8 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bg">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -21,7 +20,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/bg"
+                android:background="@color/ui_bg"
                 android:orientation="horizontal">
 
                 <ImageButton
@@ -29,7 +28,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:layout_marginStart="8dp"
-                    android:background="@color/bg"
+                    android:background="@color/ui_bg"
                     app:srcCompat="@drawable/ic_back_24"
                     tools:ignore="ContentDescription,SpeakableTextPresentCheck"
                     app:tint="@color/alter_bg" />

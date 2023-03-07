@@ -5,7 +5,7 @@
     <color name="ui_bg">#24252a</color>
 
     <color name="text">@color/white</color>
-    <color name="iconColor">@color/white</color>
+    <color name="iconColor">#a0a0a0</color>
     <color name="loading">#e0e0e0</color>
 
     <color name="grey_background">@color/ui_bg</color>

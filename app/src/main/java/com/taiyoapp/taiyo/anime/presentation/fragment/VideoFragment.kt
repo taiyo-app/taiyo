@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.domain.entity.Video
@@ -43,8 +44,19 @@ class VideoFragment : Fragment() {
         setupRecyclerView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        // status bar color
+        requireActivity().window.statusBarColor = ContextCompat.getColor(
+            requireContext(), R.color.ui_bg
+        )
+    }
+
     private fun setupAppBar() {
         with (binding) {
+            ibBack.setOnClickListener {
+                activity?.supportFragmentManager?.popBackStack()
+            }
             tvVideoKind.text = videoKind
         }
     }

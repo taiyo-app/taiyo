@@ -9,12 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import com.taiyoapp.taiyo.R
 import com.taiyoapp.taiyo.anime.presentation.adapter.MainLoadStateAdapter
 import com.taiyoapp.taiyo.anime.presentation.adapter.RefreshAction
 import com.taiyoapp.taiyo.anime.presentation.adapter.SearchAdapter
@@ -60,6 +62,14 @@ class SearchFragment : Fragment() {
         setupAnimeList()
     }
 
+    override fun onResume() {
+        super.onResume()
+        // status bar color
+        requireActivity().window.statusBarColor = ContextCompat.getColor(
+            requireContext(), R.color.ui_bg
+        )
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -77,13 +87,13 @@ class SearchFragment : Fragment() {
 
     private fun setupRecyclerView() {
         adapter = SearchAdapter(requireContext())
-//        adapter.onAnimeClick = {
-//            val fragment = DetailFragment.newInstance(it.id)
-//            requireActivity().supportFragmentManager.beginTransaction()
-//                .replace(R.id.fragment_container_view, fragment)
-//                .addToBackStack(null)
-//                .commit()
-//        }
+        adapter.onAnimeClick = {
+            val fragment = DetailFragment.newInstance(it.id)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
         val refreshAction: RefreshAction = {
             adapter.retry()
         }

@@ -2,47 +2,40 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:layout_marginVertical="8dp"
-    tools:layout_marginHorizontal="16dp"
-    android:backgroundTint="@color/bg"
-    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:backgroundTint="@color/black"
     android:background="@color/alter_bg"
+    android:clipToPadding="false"
     app:cardElevation="0dp"
-    android:layout_width="180dp"
-    android:layout_height="140dp"
     app:cardBackgroundColor="@color/black"
-    app:cardCornerRadius="16dp">
+    app:cardCornerRadius="16dp"
+    tools:layout_width="180dp"
+    tools:layout_height="140dp">
 
     <ImageView
         android:id="@+id/episode_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
+        android:layout_height="140dp"
         android:background="@color/black"
+        android:alpha="0.7"
         android:scaleType="centerCrop"
-        tools:ignore="ContentDescription" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:alpha="0.4"
-        android:background="@color/black"
-        android:scaleType="centerCrop"
-        tools:srcCompat="@tools:sample/backgrounds/scenic"
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/episode_number"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_episode_number"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:textSize="80sp"
+        android:layout_gravity="bottom|end"
+        android:textSize="48sp"
         android:textColor="@color/white"
-        android:alpha="0.6"
+        android:alpha="0.9"
         android:fontFamily="@font/roboto_black"
         android:gravity="end"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         tools:text="1" />
 
+
 </androidx.cardview.widget.CardView>
+
