@@ -1,7 +1,6 @@
 package com.taiyoapp.taiyo.anime.presentation.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -32,7 +31,6 @@ class OngoingsAdapter(
         anime?.let {
             with((holder as OngoingsViewHolder).binding) {
                 with(it) {
-                    Log.d("Total", episodesTotal)
                     Glide.with(context)
                         .load(it.image)
                         .transition(DrawableTransitionOptions.withCrossFade())

@@ -18,10 +18,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_play_24"
         app:tint="@color/white"
+        android:visibility="gone"
+        tools:visibility="visible"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck,ImageContrastCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/b_back"
+        android:id="@+id/fab_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

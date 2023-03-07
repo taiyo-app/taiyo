@@ -20,6 +20,7 @@ class DetailViewModel : ViewModel() {
     private val getVideoUseCase = GetVideoUseCase(repository)
     private val getScreenshotsUseCase = GetScreenshotsUseCase(repository)
     private val getSimilarUseCase = GetSimilarUseCase(repository)
+    private val getEpisodesUseCase = GetEpisodesUseCase(repository)
 
     private var _detailMal = MutableLiveData<DetailMal>()
     val detailMAL: LiveData<DetailMal>
@@ -46,6 +47,14 @@ class DetailViewModel : ViewModel() {
         get() = _similar
 
     private var timer: CountDownTimer? = null
+
+    private var _containsEpisodes = MutableLiveData<Boolean>()
+    val containsEpisodes: LiveData<Boolean>
+        get() = _containsEpisodes
+
+
+    private val _episode = MutableLiveData<List<Episodes.Result>>()
+
 
     fun loadDetailMal(id: Int) {
         viewModelScope.launch {
@@ -77,6 +86,17 @@ class DetailViewModel : ViewModel() {
         }
     }
 
+    fun loadEpisodesKodik(id: Int) {
+        viewModelScope.launch {
+            val episodes = getEpisodesUseCase(id)
+            if (episodes.isNotEmpty()) {
+                _containsEpisodes.value = true
+            } else {
+                _containsEpisodes.value = false
+            }
+        }
+    }
+
     private fun formatAiredOn(airedOn: String): String {
         val formattedDate = DateFormatter.formatAiredOn(airedOn)
         return if (formattedDate[0] in '0'..'9') {
@@ -89,7 +109,10 @@ class DetailViewModel : ViewModel() {
     fun getInfoMapFromDetail(detailShiki: DetailShiki): Map<String, String> {
         val episodesNumber = if (detailShiki.episodesAired == detailShiki.episodesTotal) {
             detailShiki.episodesTotal
-        } else {
+        } else if (detailShiki.episodesAired == "~") {
+            detailShiki.episodesTotal
+        }
+        else {
             detailShiki.episodesAired + " из " + detailShiki.episodesTotal
         }
         return mapOf(

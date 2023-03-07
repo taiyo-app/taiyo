@@ -194,32 +194,53 @@ class AnimeMapper {
     )
 
     fun mapEpisodeListDtoToEntity(episodesDto: EpisodesDto) = Episodes(
-        results = episodesDto.results.map { mapResultDtoToEntity(it) }
+        results = episodesDto.results?.map { mapResultDtoToEntity(it) } ?: listOf()
     )
 
-    private fun mapResultDtoToEntity(resultDto: ResultDto) = Episodes.Result(
-        translation = mapTranslationDtoToEntity(resultDto.translation),
-        episodesCount = resultDto.episodesCount,
-        seasons = resultDto.seasons.map { mapSeasonDtoToEntity(it.value) }
-    )
+    private fun mapResultDtoToEntity(resultDto: ResultDto): Episodes.Result {
+        episodeNumber = 1
+        return Episodes.Result(
+            link = resultDto.link?.let { "https:" + resultDto.link } ?: EMPTY_VALUE_STRING ,
+            translation = mapTranslationDtoToEntity(
+                resultDto.translation ?: TranslationDto(
+                    EMPTY_VALUE_INT,
+                    EMPTY_VALUE_STRING,
+                    EMPTY_VALUE_STRING
+                ),
+                resultDto.episodesCount ?: EMPTY_VALUE_INT
+            ),
+            screenshots = resultDto.screenshots?.toList() ?: listOf(),
+            episodesCount = resultDto.episodesCount ?: EMPTY_VALUE_INT,
+            seasons = mapSeasonsDtoToEntity(resultDto.seasons ?: mapOf()),
+            lastSeason = resultDto.lastSeason ?: EMPTY_VALUE_INT
+        )
+    }
 
-    private fun mapTranslationDtoToEntity(translationDto: TranslationDto) =
+    private fun mapTranslationDtoToEntity(translationDto: TranslationDto, episodesCount: Int) =
         Episodes.Translation(
-            id = translationDto.id,
-            title = translationDto.title,
-            type = translationDto.type
+            id = translationDto.id ?: EMPTY_VALUE_INT,
+            title = translationDto.title ?: EMPTY_VALUE_STRING,
+            type = translationDto.type ?: EMPTY_VALUE_STRING,
+            episodesCount = episodesCount
         )
 
-    private fun mapSeasonDtoToEntity(seasonDto: SeasonDto) = Episodes.Season(
-        episodes = seasonDto.episodes.map {
-            mapEpisodeDtoToEntity(it.value)
+    private fun mapSeasonsDtoToEntity(seasonsDto: Map<Int, SeasonDto>): Map<Int, Episodes.Season> {
+        val seasons = mutableMapOf<Int, Episodes.Season>()
+        for (seasonDto in seasonsDto) {
+            seasons[seasonDto.key] = Episodes.Season(
+                episodes = seasonDto.value.episodes?.map {
+                    mapEpisodeDtoToEntity(it.value)
+                } ?: emptyList()
+            )
         }
-    )
+        return seasons
+    }
 
-
-    private fun mapEpisodeDtoToEntity(episodeDto: EpisodeDto) = Episodes.Episode(
-        link = episodeDto.link,
-        screenshots = episodeDto.screenshots
+    private var episodeNumber = 1
+    private fun mapEpisodeDtoToEntity(episodeDto: EpisodeDto?) = Episodes.Episode(
+        link = episodeDto?.link ?: EMPTY_VALUE_STRING,
+        screenshots = episodeDto?.screenshots ?: emptyList(),
+        episodeNumber = episodeNumber++
     )
 
     private fun formatStatus(status: String?) = when (status) {

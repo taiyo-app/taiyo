@@ -5,7 +5,7 @@ import com.taiyoapp.taiyo.anime.domain.entity.Episodes.Episode
 
 object EpisodesDiffCallback : DiffUtil.ItemCallback<Episode>() {
     override fun areItemsTheSame(oldItem: Episode, newItem: Episode): Boolean {
-        return oldItem.link == newItem.link
+        return oldItem.episodeNumber == newItem.episodeNumber
     }
 
     override fun areContentsTheSame(oldItem: Episode, newItem: Episode): Boolean {

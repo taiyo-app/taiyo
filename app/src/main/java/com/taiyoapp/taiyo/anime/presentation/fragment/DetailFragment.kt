@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -57,6 +56,9 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
+        binding.fabBack.setOnClickListener {
+            activity?.supportFragmentManager?.popBackStack()
+        }
     }
 
     override fun onResume() {
@@ -82,6 +84,7 @@ class DetailFragment : Fragment() {
         observeViewModel()
         viewModel.loadDetailMal(animeId)
         viewModel.loadDetailShiki(animeId)
+        viewModel.loadEpisodesKodik(animeId)
     }
 
     private fun observeViewModel() {
@@ -151,7 +154,11 @@ class DetailFragment : Fragment() {
                 with(similarAdapter) {
                     submitList(similar)
                     onAnimeClick = {
-                        Toast.makeText(requireContext(), "OnClick", Toast.LENGTH_SHORT).show()
+                        val fragment = newInstance(it.id)
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container_view, fragment)
+                            .addToBackStack(null)
+                            .commit()
                     }
                 }
                 with(binding.layoutSimilar) {
@@ -165,6 +172,15 @@ class DetailFragment : Fragment() {
                 }
             } else {
                 binding.layoutSimilar.llSimilar.visibility = View.GONE
+            }
+            viewModel.containsEpisodes.observe(viewLifecycleOwner) {
+                with(binding) {
+                    if (it) {
+                        fabWatch.visibility = View.VISIBLE
+                    } else {
+                        fabWatch.visibility = View.GONE
+                    }
+                }
             }
         }
     }
@@ -204,15 +220,6 @@ class DetailFragment : Fragment() {
                 layoutInfo.flInfo.visibility = View.VISIBLE
             }
 
-            // fab watch
-            fabWatch.setOnClickListener {
-                val watchFragment = WatchFragment.newInstance(animeId, detailShiki.russian)
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_view, watchFragment)
-                    .addToBackStack(null)
-                    .commit()
-            }
-
             // init timer
             if (detailShiki.nextEpisodeAt != -1L) {
                 with(binding.layoutTimer) {
@@ -226,6 +233,15 @@ class DetailFragment : Fragment() {
                 }
             } else {
                 binding.layoutTimer.clTimer.visibility = View.GONE
+            }
+
+            // fab watch
+            fabWatch.setOnClickListener {
+                val watchFragment = WatchFragment.newInstance(animeId, detailShiki.russian, detailShiki.kind)
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_view, watchFragment)
+                    .addToBackStack(null)
+                    .commit()
             }
 
             // description

@@ -5,11 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.taiyoapp.taiyo.anime.data.repository.AnimeRepositoryImpl
+import com.taiyoapp.taiyo.anime.domain.entity.Episodes
 import com.taiyoapp.taiyo.anime.domain.entity.Episodes.*
 import com.taiyoapp.taiyo.anime.domain.usecase.GetEpisodesUseCase
 import kotlinx.coroutines.launch
 
-class EpisodeListViewModel : ViewModel() {
+class EpisodesViewModel : ViewModel() {
     private val repository = AnimeRepositoryImpl()
 
     private val getEpisodesUseCase = GetEpisodesUseCase(repository)
@@ -26,25 +27,33 @@ class EpisodeListViewModel : ViewModel() {
 
     fun loadTranslations(animeId: Int) {
         viewModelScope.launch {
-            _episodeList.value = getEpisodesUseCase(animeId)!!
-            val translationList = arrayListOf<Translation>()
-            for (result in _episodeList.value!!) {
-                translationList.add(result.translation)
+            val episodes = getEpisodesUseCase(animeId)
+            if (episodes.isNotEmpty()) {
+                _episodeList.value = getEpisodesUseCase(animeId)!!
+                val translationList = arrayListOf<Translation>()
+                for (result in _episodeList.value!!) {
+                    translationList.add(result.translation)
+                }
+                _translations.value = translationList
+            } else {
+                throw RuntimeException("Episodes is empty")
             }
-            _translations.value = translationList
         }
     }
 
     fun loadEpisodes(translationId: Int) {
         for (result in _episodeList.value!!) {
             if (translationId == result.translation.id) {
-                if (result.seasons.size > 1) {
-                    // TODO() убрать сезон со спешлами
-                    throw RuntimeException(
-                        "В списке 2 сезона одного сезона (спешлы сезона/эпизоды сезона)"
-                    )
+                if (result.seasons.isNotEmpty()) {
+                    _episodes.value = result.seasons[result.lastSeason]?.episodes
                 } else {
-                    _episodes.value = result.seasons[0].episodes
+                    _episodes.value = mutableListOf(
+                        Episode(
+                            link = result.link,
+                            screenshots =  result.screenshots,
+                            episodeNumber = 1
+                        )
+                    )
                 }
             }
         }

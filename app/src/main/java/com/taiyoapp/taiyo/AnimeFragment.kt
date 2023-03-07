@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.taiyoapp.taiyo.anime.presentation.adapter.ViewPagerAdapter
@@ -42,6 +43,14 @@ open class AnimeFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             tab.text = fragmentListTitles[position]
         }.attach()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // status bar color
+        requireActivity().window.statusBarColor = ContextCompat.getColor(
+            requireContext(), R.color.bg
+        )
     }
 
     override fun onDestroyView() {
